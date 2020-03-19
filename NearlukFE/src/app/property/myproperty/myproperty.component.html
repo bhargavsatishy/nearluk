@@ -1,0 +1,110 @@
+<div style="align-content: center" *ngIf="showSpinner==false">
+  <div id="noPropText" *ngIf="myproperty?.length==null">
+    <img src="../../../assets/images/no properties.png" class="img-fluid" alt="No Bidded properties.."
+      style="width:100%;height:600px">
+  </div>
+</div>
+<div *ngIf="showSpinner==true" style="padding-left:45%;padding-top: 20%">
+  <mat-spinner strokeWidth="3" [diameter]="80"></mat-spinner>
+</div>
+
+<div class="loading" id="style-1" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()" [scrollWindow]="false" style="height:900px; overflow-y: scroll;">
+  <div class="container" style="margin-top:100px;" *ngIf="showSpinner==false">
+    <div class="row" style="margin:0px;">
+      <div class="col-lg-4" *ngFor="let nls of myproperty">
+        <div class="card">
+          <div class="card-body">
+            <div class="img-wrapper">
+
+              <div class="container2" (click)="moredetails(nls.id)">
+                <img [src]=nls.img alt="user image" width="100%" height="200px">
+                <div class="content1">
+                  <div>
+                    <h6 style=" margin: 0;
+                    position: absolute;
+                    top: 50%;">NearLuk</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="data-field ">
+              <div class="name-field">
+                <h6>
+                  <span>
+                    <p aria-hidden="true" id="username" title={{nls.propertyname|titlecase}}
+                      (click)="moredetails(nls.id)"> &nbsp; {{(nls.propertyname)|titlecase|slice:0:8}}</p>
+                  </span>
+                </h6>
+              </div>
+              <div class="date-field">
+                <h6>
+                  <span>
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    {{nls.posteddate | date }}
+                  </span>
+                </h6>
+              </div>
+            </div>
+            <div class="row mid-con" style="margin:0px;">
+              <div class="left-part">
+                <div class="con-bar">
+                  <span class="text-bold">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  </span>
+                  {{((nls.areaname?.length>10)?(nls.areaname|slice:0:10)+'...':(nls.areaname))}}
+                  <span>
+                  </span>
+                </div>
+                <div class="con-bar">
+                  <span class="text-bold"></span>
+                  <i class="fa fa-th-large" aria-hidden="true"></i>
+                  <span>
+                    {{((nls.propertytype?.length>10)?(nls.propertytype|slice:0:10)+'...':(nls.propertytype))}}</span>
+                </div>
+                <div class="con-bar">
+                  <span class="text-bold">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                  </span>
+                  <span>
+                    {{nls.country_currency_symbol}}{{nls.price}}/{{nls.rentalperiod}}
+                  </span>
+                </div>
+              </div>
+              <div class="right-part">
+                <div>
+                  <button type="button" class="btn btn-success btn-xs btn-edit">
+                    <i class="fa fa-pencil" (click)="update(nls.id)" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-danger btn-xs btn-del">
+                    <i class="fa fa-trash-o" (click)="deleteProperty(nls.id)" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+              <div *ngIf='nls.status=="Active"' id="switch">
+                Active/Inactive : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <p-inputSwitch (onChange)="propertyStatusChange($event,nls.id)" [ngModel]="nls.status" id="status">
+                </p-inputSwitch>
+              </div>
+              <div *ngIf='nls.status=="Inactive"' id="switch">
+                Active/Inactive : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <p-inputSwitch (onChange)="propertyStatusChange($event,nls.id)" id="status"></p-inputSwitch>
+              </div>
+            </div>
+            <div class="row" style="margin:0px;" *ngIf="!username" id="moredetails">
+              <div *ngIf="userType!='Agent'" class="footer-bar-card">
+                <span class="more-del" (click)="moredetails(nls.id)">More Details</span>
+                <span class="addagent" *ngIf="roleid!=2" routerLink="contactagent"
+                  (click)="contactAgent(nls.id,nls.cityname)">Add
+                  Agent
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

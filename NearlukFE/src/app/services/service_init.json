@@ -1,0 +1,5 @@
+{ 
+    "name": "Nearluk",
+    "db": "Nearluk",
+    "api":"http://localhost:3400"
+}

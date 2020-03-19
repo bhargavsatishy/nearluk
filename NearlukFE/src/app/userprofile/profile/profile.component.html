@@ -1,0 +1,456 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<div *ngIf="showSpinner==true" style="padding-left: 45%;padding-top: 20%">
+    <mat-spinner strokeWidth="3" [diameter]="80"></mat-spinner>
+</div>
+
+
+<div class="container emp-profile" *ngIf="isTrue==true && showSpinner==false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Profile</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img [src]="url" alt="" alt="stack photo" class="img-cercle">
+                               <div style="margin-left: 10px;">
+                                    {{userData.rolename}}
+                               </div> 
+                                <div id="imgdel" *ngIf="profiledel==true" class="btn btn-sm btn-del">
+                                    <a (click)="onDelete(url)" class="fa fa-times" style="margin-bottom: 90px"></a>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="profile-head">
+                                    <h5>
+                                        {{userData.username|uppercase}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" class="profile-edit-btn" (click)="getUserId(userData.id)"
+                                    name="btnAddMore" value="Edit Profile" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <br>
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <div class="row">
+
+                                    </div>
+                                    <div class="row hi">
+                                        <div class="col-md-6">
+                                            <label>Name :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{userData.username}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row hi">
+                                        <div class="col-md-6">
+                                            <label>Email :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{userData.email}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row hi">
+                                        <div class="col-md-6">
+                                            <label>Phone :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p *ngIf='userData.mobile!==""'>{{userData.isd}} {{userData.mobile}}</p>
+                                            <p *ngIf='userData.mobile==null'>NA</p>
+                                        </div>
+                                    </div>
+                                    <div class="row hi">
+                                        <div class="col-md-6">
+                                            <label>Profession :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p *ngIf='userData.occupation!=""'>{{userData.occupation}}</p>
+                                            <p *ngIf='userData.occupation==null'>NA</p>
+                                        </div>
+                                    </div>
+                                    <div class="row hi">
+                                        <div class="col-md-6">
+                                            <label>Date of birth :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p *ngIf='userData.dob!=""'>{{userData.dob|date:"dd/MM/yyyy"}}</p>
+                                            <p *ngIf='userData.dob==null'>NA</p>
+                                        </div>
+                                    </div>
+                                    <div class="row hi">
+                                        <div class="col-md-6">
+                                            <label>Gender :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p *ngIf='userData.gender!=""'>{{userData.gender}}</p>
+                                            <p *ngIf='userData.gender==null'>NA</p>
+                                        </div>
+                                    </div>
+                                    <div class="row hi">
+                                        <div class="col-md-6">
+                                            <label>Address :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p *ngIf='userData.address!=""'>{{userData.address}}</p>
+                                            <p *ngIf='userData.address==null'>NA</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="row hi" *ngIf="userData.rolename=='Agent'">
+                                        <div class="col-md-6">
+                                            <label>Discription :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p *ngIf='userData.discription!=""'>{{userData.discription}}</p>
+                                            <p *ngIf='userData.discription==null'>NA</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="container" id="update" *ngIf='!isTrue'>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Profile Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="offset-12 col-md-12" id="enquiry">
+                    <div class="col-md-12">
+                        <form #form="ngForm" (ngSubmit)="form.myForm.valid && update(form.value)" id="form"
+                            name="myForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div>
+                                        <b>Name :</b>
+                                        <span style="color: red"> *</span>
+                                        <input type="text" name="name" #name=ngModel [(ngModel)]="profile.name"
+                                            pattern="[^ ?0-9~!@:$%&*=+:'`{}>();^][ A-Za-z_./#\-,]*" class="form-control"
+                                            placeholder="update your Name" required maxlength="29"
+                                            [ngClass]="{'is-invalid':form.submitted && name.invalid}" />
+                                        <span *ngIf="name.errors && (name.touched || name.dirty)" style="color:red">
+                                            <span [hidden]="!name.errors.required">name required </span>
+                                            <span [hidden]="!name.errors.pattern">Please enter valid name </span>
+                                        </span>
+                                        <div class="invalid-feedback"
+                                            *ngIf="!(name.errors && (name.touched || name.dirty))">
+                                            <div>
+                                                <h6>please select name</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <b>Mobile :</b>
+                                        <input type="text" maxlength="15" class="form-control"
+                                            placeholder="Mobile Number" #mobile="ngModel" [(ngModel)]="profile.mobile"
+                                            name="mobile" autocomplete="off" pattern="[0-9]*" disabled />
+                                        <span *ngIf="mobile.errors && (mobile.touched || mobile.dirty)">
+
+                                            <span style="color:red" data-toggle="popover"
+                                                [hidden]="!mobile.errors.pattern">mobile number
+                                                should be only numbers</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-4">
+
+                                    <div *ngIf="isButtonVisible==true">
+                                        <b> Email :</b>
+                                        <input type="mail" name="email" #email=ngModel [(ngModel)]="profile.email"
+                                            class="form-control" placeholder="Enter your Email"
+                                            [ngClass]="{'is-invalid':form.submitted && email.invalid}" required
+                                            pattern="^[A-Za-z0-9 ! # $ % & .' * + - / = ? ^ _ ` { | } ~]{1,50}@[A-Za-z]{3,8}.[A-Za-z]{2,4}$" />
+                                        <button class="btn btn-info" (click)="Verifymail()">Verify Email</button>
+
+                                        <span *ngIf="email.errors && (email.touched || email.dirty)">
+                                            <span [hidden]="!email.errors.required">mail id required </span>
+                                            <span [hidden]="!email.errors.pattern">please enter valid email</span>
+                                        </span>
+                                        <div class="invalid-feedback"
+                                            *ngIf="!(email.errors && (email.touched || email.dirty))">
+                                            <div>
+                                                <h6>please select email</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="isButtonPending==true">
+                                        <b> Email :</b>
+                                        <input type="mail" name="email" #email=ngModel [(ngModel)]="profile.email"
+                                            class="form-control" placeholder="Enter your Email"
+                                            [ngClass]="{'is-invalid':form.submitted && email.invalid}" required
+                                            pattern="^[A-Za-z0-9 ! # $ % & .' * + - / = ? ^ _ ` { | } ~]{1,50}@[A-Za-z]{3,8}.[A-Za-z]{2,4}$" />
+                                        <button class="btn btn-warning">Pending</button>&nbsp;
+                                        <button class="btn btn-info" (click)="Verifymail()">Resend Mail</button>
+
+                                        <span *ngIf="email.errors && (email.touched || email.dirty)">
+                                            <span [hidden]="!email.errors.required">mail id required </span>
+                                            <span [hidden]="!email.errors.pattern">please enter valid email</span>
+                                        </span>
+                                        <div class="invalid-feedback"
+                                            *ngIf="!(email.errors && (email.touched || email.dirty))">
+                                            <div>
+                                                <h6>please select email</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="isButtonDeVisible==true">
+                                        <b> Email :</b>
+                                        <input type="mail" name="email" #email=ngModel [(ngModel)]="profile.email"
+                                            class="form-control" disabled placeholder="Enter your Email"
+                                            [ngClass]="{'is-invalid':form.submitted && email.invalid}" required
+                                            pattern="^[A-Za-z0-9 ! # $ % & .' * + - / = ? ^ _ ` { | } ~]{1,50}@[A-Za-z]{3,8}.[A-Za-z]{2,4}$" />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <b>Gender:</b>
+                                        <span style="color: red"> *</span>
+                                        <br>
+                                        <form #f="ngForm">
+                                            <input type="radio" name="gender" #gender=ngModel
+                                                [(ngModel)]="profile.gender" value="Male" required> Male&nbsp;&nbsp;
+                                            <input type="radio" name="gender" #gender="ngModel"
+                                                [(ngModel)]="profile.gender" value="Female" required> Female&nbsp;&nbsp;
+                                            <input type="radio" name="gender" #gender="ngModel"
+                                                [(ngModel)]="profile.gender" value="Others" required> Others&nbsp;&nbsp;
+                                            <span *ngIf="gender.invalid && gender.touched">Please select gender
+                                            </span>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <b> Occupation :</b>
+                                        <span style="color: red"> *</span>
+                                        <br>
+                                        <form #f="ngForm">
+                                            <input type="text" name="occupation" #occupation=ngModel
+                                                [(ngModel)]="profile.occupation"
+                                                pattern="[^ ?0-9~!@:$%&*=+:'`{}>();^][ A-Za-z_./#\-,]*" maxlength="50"
+                                                class="form-control" placeholder="Enter your occupation" required />
+                                            <span *ngIf="occupation.errors && (occupation.touched || occupation.dirty)"
+                                                style="color:red">
+                                                <span>enter valid occupation
+                                                </span>
+                                            </span>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <b> Date of Birth :</b>
+                                        <input type="date" onkeydown="return false" min="1950-01-01" max="2010-12-31"
+                                            name="dob" #dob=ngModel [(ngModel)]="profile.dob" class="form-control"
+                                            placeholder="Enter Your Date of Birth" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <b>Country :</b>{{options.countryname|json}}
+                                    <span style="color: red"> *</span>
+                                    <select #country="ngModel" [(ngModel)]="profile.country" name="country"
+                                        class="form-control" [ngModelOptions]="{standalone: true}"
+                                        placeholder="Country *" (change)="getStates(country)" required>
+                                        <option value="null" hidden selected> Select country </option>
+                                        <option class="option" *ngFor='let option1 of options' [value]="option1.id">
+                                            {{option1.countryname}}
+                                        </option>
+                                    </select>
+                                    <span *ngIf="country.touched && country.invalid">
+                                        please select country
+                                    </span>
+                                    <div class="invalid-feedback"
+                                        *ngIf="!(country.errors && (country.touched || country.dirty))">
+                                        <div>
+                                            <h6>please select country</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <b>State :</b>
+                                    <!-- <span style="color: red"> *</span> -->
+                                    <select name="state" class="form-control" #state="ngModel"
+                                        [(ngModel)]="profile.state" #a (change)="getCities(state)" required>
+                                        <option value="null" hidden selected>
+                                            Select state
+                                        </option>
+                                        <option class='option' *ngFor='let option1 of optionsstate'
+                                            [value]="option1.id">
+                                            {{option1.statename}}
+                                        </option>
+                                    </select>
+                                    <span *ngIf="state.touched && state.invalid">
+                                        please select state
+                                    </span>
+                                    <div class="invalid-feedback"
+                                        *ngIf="!(state.errors && (state.touched || state.dirty))">
+                                        <div>
+                                            <h6>please select state</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <b>City : </b>
+                                    <!-- <span style="color: red"> *</span> -->
+                                    <select name="city" class="form-control" #city="ngModel" [(ngModel)]="profile.city"
+                                        (change)="getAreas(city)" required>
+                                        <option value="null" hidden selected>Select city</option>
+                                        <option class="option" *ngFor="let opt of optionscity" [value]="opt.id">
+                                            {{opt.cityname}}</option>
+                                    </select>
+                                    <span *ngIf="state.touched && state.invalid">
+                                        please select City
+                                    </span>
+                                    <div class="invalid-feedback"
+                                        *ngIf="!(state.errors && (state.touched || state.dirty))">
+                                        <div>
+                                            <h6>please select City</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="area" class="col-md-4">
+                                    <b>Area : </b>
+                                    <!-- <span style="color: red"> *</span> -->
+                                    <select name="area" class="form-control" #area1="ngModel" [(ngModel)]="profile.area"
+                                        required>
+                                        <option value="null" hidden selected>Select Area *</option>
+                                        <option class="option" *ngFor="let a of area" [value]="a.id">{{a.areaname}}
+                                        </option>
+                                    </select>
+                                    <span *ngIf="area.touched && area.invalid">
+                                        please select area
+                                    </span>
+                                    <div class="invalid-feedback"
+                                        *ngIf="!(area.errors && (area.touched || area.dirty))">
+                                        <div>please select area</div>
+                                    </div>
+                                </div>
+                                <br>
+
+
+                                <div id="address" class="col-md-4">
+                                    <div>
+                                        <b> Address :</b>
+                                        <span style="color: red"> *</span>
+                                        <br>
+                                        <form #f="ngForm">
+                                            <input type="text" name="address" #address=ngModel
+                                                [(ngModel)]="profile.address" maxlength="50" class="form-control"
+                                                pattern="[^ 0~!@#$%&*:()=;^][ a-zA-Z0-9,./#\-,:]*"
+                                                placeholder="Enter your address" required />
+                                            <span *ngIf="address.errors && (address.touched || address.dirty)"
+                                                style="color:red">
+                                                <span>enter valid address
+                                                </span>
+                                            </span>
+                                        </form>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div id="address" class="col-md-4" *ngIf="userData.rolename=='Agent'">
+                                    <div>
+                                        <b> Description: </b>
+                                        <textarea rows="1" cols="50" autocomplete="off" type="text" maxlength="50"
+                                            name="discription" #discription=ngModel [(ngModel)]="profile.discription"
+                                            class="form-control" placeholder="Enter your discription" required
+                                            pattern="[^ ^][ -A-Za-z0-9!@#$%^&*:()_`=,/+~]*" required></textarea>
+                                        <span *ngIf="discription.errors && (discription.touched || discription.dirty)"
+                                            style="color:red">
+
+                                            <span [hidden]="!discription.errors.pattern">
+                                                enter valid Discription
+                                            </span>
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                                <div id="image" class="col-md-4">
+                                    <div>
+                                        <b>Image :</b>
+                                        <input type="file" auto="false" accept="image/*" (change)="fileSelect($event)"
+                                            alt="no pic to display">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button class="btn btn-info" (click)="isTrue=true">Back
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button
+                                        [disabled]="name.invalid || gender.invalid || mobile.invalid || occupation.invalid || address.invalid"
+                                        class="btn btn-info" (click)="updateuser()">Update
+                                        Info
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

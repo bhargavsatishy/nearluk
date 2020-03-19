@@ -1,0 +1,52 @@
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <tr>
+          <td>
+            <b> Name</b>
+          </td>
+          <td>
+            <b> Email</b>
+          </td>
+          <td>
+            <b> Message</b>
+          </td>
+          <td>
+            <b> Date</b>
+          </td>
+          <td>
+            <b> Status</b>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+        <tr *ngFor="let Users of contact">
+          <td>
+            {{Users.name}}
+          </td>
+          <td>
+            {{Users.email}}
+          </td>
+          <td>
+            {{Users.message}}
+          </td>
+          <td>
+            {{Users.posteddate}}
+          </td>
+          <td>
+            {{Users.status}}
+          </td>
+          <td *ngIf="Users.status=='A'">
+            <button class="btn btn-primary" (click)="StatusUpdate(Users.id)">Update</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

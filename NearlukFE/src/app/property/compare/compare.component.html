@@ -1,0 +1,93 @@
+<div class="container" id="cont" style="margin-top: 10%">
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let Propertys of propertyList" id="example2">
+      <div class="card" id="cards">
+
+        <div class="container2">
+
+          <div class="card-body">
+            <i class="fa fa-fw fa-remove fa-1x" style="float:right" (click)="removecompare(Propertys.id)" data-toggle="tooltip" data-placement="top"
+              title="Remove "></i>
+            <div class="img-wrapper">
+              <img [src]=Propertys.img class="" width="100%" height="200px">
+              <div class="content1">
+                <div class="vertical-center">
+                  <h6>NearLuk</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mid-con" style="margin:0px;">
+          <div class="container">
+            <div class="col-md-12">
+              <h5 class="text-primary">
+                <b id="username">
+                  {{(Propertys.propertyname?.length>25)?(Propertys.propertyname|slice:0:25)+'...':(Propertys.propertyname)|titlecase}}
+                </b>
+              </h5>
+            </div>
+            <hr>
+            <div>
+              <b>Property Details : </b>
+              <br /> Facing :
+              <b>{{Propertys.facing}} </b>
+              <br> Price :
+              <b>{{Propertys.price}}{{Propertys.currency_symbol}}</b>
+
+              <br> Property Area:
+              <b>{{Propertys.propertyarea}}</b>
+              <br>
+            </div>
+            <br>
+
+            <div class="card2" id="accordion">
+              <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                  <b> Facilities & Amenities </b>
+                </a>
+              </div>
+              <div class="card-body1" id="collapseTwo" class="collapse" data-parent="#accordion">
+                <h6 class="text-center">
+
+                </h6>
+                <p *ngFor="let facility of Propertys.facilities" style="display:inline">
+                  <li>
+                    <img height="20px" width="20px" src="http://localhost:3400/{{facility}}.png"> {{facility|titlecase}}
+                  </li>
+                </p>
+                <hr>
+                <h6 class="text-center">
+                  <b>property Info</b>
+                </h6>
+                <tr>
+                  <td>
+                    <div *ngFor="let a of Propertys.amenities">
+                      <li>
+                        <img height="20px" width="20px" src="http://localhost:3400/{{a}}.png"> {{a}} :</li>
+                    </div>
+                  </td>
+                  <td>
+                    <div *ngFor="let b of Propertys.amenities_value">
+                      &nbsp;{{b}}
+                    </div>
+                  </td>
+                </tr>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class=" offset-md-5   col-md-4" class="removebtn">
+          <button class="btn btn-info" (click)="removeallCompare()" id="delete" style="width: max-content">REMOVE ALL
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

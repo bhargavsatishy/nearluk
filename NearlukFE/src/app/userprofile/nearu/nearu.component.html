@@ -1,0 +1,218 @@
+<div class="container">
+
+  <div class="card " style="margin-top: 6%;">
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-md-3">
+          <select id="inputfields" name="propertytype" autocomplete="off" class="form-control" #property_type="ngModel"
+            [(ngModel)]="property.propertyTypeId" #propertyTypeId required>
+            <option [ngValue]="undefined" hidden selected>
+              <b>Select Property Type *</b>
+            </option>
+            <option class='option' *ngFor='let PropertyType of prope' [value]="PropertyType.id">
+              {{PropertyType.propertytype}}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select id="inputfields" name="radius" autocomplete="off" class="form-control" #radius="ngModel"
+            [(ngModel)]="property.radius" #radius>
+            <option [ngValue]="undefined" hidden selected>Kilometers</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input type="text" #min pInputText pKeyFilter="pint" [(ngModel)]="property.minprice" class="form-control"
+            placeholder="Min Price" id="minprice" style="width:100%;" />
+        </div>
+
+        <div class="col-md-2">
+          <input type="text" #max pInputText pKeyFilter="pint" [(ngModel)]="property.maxprice" class="form-control"
+            placeholder="Max Price" id="maxprice" style="width:100%;" />
+        </div>
+
+        <div class="col-md-2">
+          <button type="button" class="btn btn-info " id="searchicon" (click)="selecttype()">
+            submit
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div style="align-content: center;margin-top: 10%" *ngIf="noDataFound==true">
+
+
+  <div id="noPropText">
+    <img src="../../../assets/images/nofavourites.png" class="img-fluid" style="width:100%;height:500px">
+  </div>
+</div>
+
+<div class="container-fluid" id="nearupage" *ngIf="noDataFound==false">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="loading" id="style-1" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()" [scrollWindow]="false" style="height:900px; overflow-y: scroll;">
+        <div class="container py-3" id="myprprtycard">
+          <div class="card" *ngFor="let nls of propertyList" id="mycard">
+            <div class="row">
+              <div class="col-md-12">
+                <div>
+                  <div class="container2">
+                    <img [src]=nls.img (click)="moredetails(nls.propertyid)" alt="user image" height="150px"
+                      width="100%" />
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="img_hoverlay transition_3s radius_5 text-center" style="margin-top: -15%">
+                          <div class="tooltip1">
+                            <i class="fa fa-eye" style="color:#17a2b8" aria-hidden="true" *ngIf="nls.userviewd!=null">
+                              <span class="tooltiptext">
+                                Viewed
+                              </span>
+                            </i>
+                          </div>
+                        </div>
+                        <div class="col-md-3 " style="margin-top: -15%;margin-left: 270px;">
+                          <div class="tooltip2">
+                            <i class="fa fa-phone" style="color:#17a2b8;margin-left: 100%" aria-hidden="true"
+                              *ngIf="nls.contactviewed!=null">
+                              <span class="tooltiptext2" style="margin-left: -120px;">
+                                ContactViewed
+                              </span>
+                            </i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="line-height: 30px;">
+              <div class="col-md-12">
+                <div class=" col-lg-8 col-md-12">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th colspan="3">
+                          {{((nls.propertyname?.length>10)?(nls.propertyname|slice:0:10)+'...':(nls.propertyname)) | titlecase}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tr>
+                      <td>Type </td>
+                      <td>:</td>
+                      <td>{{((nls.propertytype?.length>10)?(nls.propertytype|slice:0:10)+'...':(nls.propertytype))}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Distance </td>
+                      <td>:</td>
+                      <td>{{nls.distance | number}}&nbsp; Miles</td>
+                    </tr>
+                    <tr>
+                      <td>Price </td>
+                      <td>:</td>
+                      <td>{{nls.price}}/{{nls.rentalperiod}}</td>
+                    </tr>
+                    <tr>
+                      <td>Area </td>
+                      <td>:</td>
+                      <td>{{((nls.areaname?.length>20)?(nls.areaname|slice:0:10):(nls.areaname))}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="3">
+                        <span class="more-del" (click)="moredetails(nls.propertyid)">More Details</span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card map-card">
+        <div class="card-body">
+          <div id="agmap">
+            <agm-map #gm [latitude]="latt" [longitude]="lngg" [zoom]='15'>
+              <agm-marker [(latitude)]="latt" [(longitude)]="lngg"></agm-marker>
+              <agm-marker *ngFor="let m of propertyList; let i = index" [latitude]="m.latitude"
+                [longitude]="m.longitude" (mouseOver)="onMouseOver(infoWindow,gm,m.id)"
+                (mouseOut)="onMouseOverout(infoWindow,gm)" [iconUrl]="iconUrl">
+                <div>
+                  <agm-info-window [disableAutoPan]="true" id="hovercard" #infoWindow>
+                    <div *ngIf='propertymap!=null' style="max-width: 450px">
+                      <div class="row" (click)="moredetails(propertymap.id)">
+                        <div class="col-md-4">
+                          <img class=" " [src]=propertymap.img alt="Property image" width="100%;" height="100%;" />
+                        </div>
+                        <div class="col-md-8">
+                          <table class="table" style="text-align:left" class="noborder">
+                            <thead>
+                              <tr>
+                                <th colspan="2">{{propertymap.propertyname|titlecase}}</th>
+                              </tr>
+                              <hr>
+                            </thead>
+                            <tr>
+                              <th>Price</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.price}}</td>
+                            </tr>
+                            <tr>
+                              <th>Duration</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.rentalperiod}}</td>
+                            </tr>
+                            <tr>
+                              <th>Available date</th>&nbsp;:&nbsp;
+                              <td *ngIf="propertymap.available!=null">
+                                {{propertymap.available | date}}
+                              </td>
+                              <td *ngIf="propertymap.available==null">
+                                NA
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Posted date</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.posteddate | date }}</td>
+                            </tr>
+                            <tr>
+                              <th>Area</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.propertyarea}}/Square Feets</td>
+                            </tr>
+                            <tr>
+                              <th>Type</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.propertytype}}</td>
+                            </tr>
+                          </table>
+                        </div>
+
+                      </div>
+                    </div>
+                  </agm-info-window>
+                </div>
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

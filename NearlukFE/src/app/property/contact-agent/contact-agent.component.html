@@ -1,0 +1,233 @@
+<div id="noAgents" *ngIf="agents?.length==null">
+  <div id="noPropText">
+    <img src="../../../assets/images/noagents.PNG" class="img-fluid" alt="No Agents Found in your City.." style="width:100%;height:500px">
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Agent Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let profile of agentData" id="prfl">
+            <div class="offset-md-12 col-md-12" id="profilebg">
+              <div class="row">
+                <div class="col-md-4">
+                  <img [src]="profile.img" alt="stack photo" class="img-cercle">
+                </div>
+                <div class="col-md-4">
+                  <div id="prflhead">
+                    <b class="pname">
+                      <h5>{{profile.name|uppercase}}</h5>
+                    </b>
+                  </div>
+                  <h4 id="prflhead">Profile Info</h4>
+                </div>
+                <div class="col-md-4">
+                  <i *ngIf="noData==true" class="fa fa-check-circle" aria-hidden="true">
+                    Notification sent</i>
+                </div>
+
+              </div>
+              <hr>
+
+              <div class="offset-md-1 col-md-11" id="details">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="text" hidden>
+                      User Id &nbsp;&nbsp; &nbsp;&nbsp; :
+                      <b>{{profile.usrname}}</b>
+                    </div>
+                    <div class="text">
+                      Occupation &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; :
+                      <b>{{profile.occupation}}</b>
+                    </div>
+                    <div class="text">
+                      Mobile &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; :
+                      <b>{{profile.isd}} {{profile.mobile}}</b>
+                    </div>
+                    <div class="text">
+                      Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+                      <b>{{profile.email}}</b>
+                    </div>
+                    <div class="text">
+                      Date of Birth &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; :
+                      <b>{{profile.dob|date:"dd/MM/yyyy"}}</b>
+                    </div>
+                    <div class="text">
+                      Gender &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; :
+                      <b>{{profile.gender}}</b>
+                    </div>
+                    <div class="text">
+                      Address &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; :
+                      <b>{{profile.address}}</b>
+                    </div>
+
+                    <div class="text">
+                      Discription &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;:
+                      <b>{{profile.discription}}</b>
+                    </div>
+                  </div>
+                </div>
+                <div class="offset-md-3 col-md-5">
+                  <button *ngIf="noData!=true && alreadyAdded!=true" class="btn btn-info" (click)="addAgent()" id="addagentbtn">
+                    add this agent</button>
+                  <i *ngIf="alreadyAdded==true" class="fa fa-check-circle" aria-hidden="true">
+                    Already Added</i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<section>
+  <div class="container py-3">
+    <div class="card card1" *ngFor="let agent of agents" id="agentcard">
+      <div class="row " style="margin:0px;">
+        <div class="col-lg-4 col-md-12">
+          <div id="pimg">
+            <img [src]=agent.img alt="user image" width="90%" height="200px" />
+          </div>
+        </div>
+        <div class=" col-lg-8 col-md-12 px-3">
+          <div class="card-block px-3">
+            <div class="row">
+              <h5 id="username" title={{agent.name|titlecase}}>
+                {{agent.name}}
+              </h5>
+            </div>
+            <hr>
+            <small id="headdingtext">Mobile :</small>
+            <span>{{agent.mobile}}</span>
+            <hr>
+            <small id="headdingtext">Qulification: &nbsp;</small>
+            <span>{{agent.occupation}}</span>
+            <div class="row">
+              <div id="moredetails">
+                <button class="morebutton" data-toggle="modal" data-target="#myModal"
+                  (click)="agentDetails(agent.id)">Agent Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3" *ngFor="let agent of agents">
+      <div class="card">
+        <div class="card-body">
+          <div class="img-wrapper">
+            <img [src]=agent.img class="img-fluid" width="100%"> </div>
+          <div class="data-field ">
+            <!-- <div class="name-field">
+              <h6>
+                <span>
+                  <i class="" aria-hidden="true" title={{agent.name|titlecase}}></i>
+                </span>{{agent.name}}</h6>
+            </div> -->
+            <!-- <div class="date-field">
+              <h6>
+                <span>
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </span> {{agent.mobile}}</h6>
+            </div> -->
+          </div>
+          <div class="row mid-con" style="margin:0px;">
+            <div class="left-part">
+              <!-- <div class="con-bar">
+                <span class="text-bold">
+                  <i class="" aria-hidden="true"></i>
+                </span>Mobile :
+                <span>
+                  <b>{{agent.price}}/{{agent.rentalperiod}}</b>
+                </span>
+              </div> -->
+
+
+              <div class="con-bar">
+                <span class="text-bold"></span>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>&nbsp; Agent Info:</span>
+              </div>
+
+              <div class="con-bar">
+                <span class="text-bold">
+                  <i class="" aria-hidden="true"></i>
+                </span>Name:
+                <span>
+                  <b>{{agent.name}}</b>
+                </span>
+              </div>
+
+              <div class="con-bar">
+                <span class="text-bold">
+                  <i class="" aria-hidden="true"></i>
+                </span>Mobile:
+                <span>
+                  <b>{{agent.mobile}}</b>
+                </span>
+              </div>
+
+              <div class="con-bar">
+                <span class="text-bold">
+                  <i class="" aria-hidden="true"></i>
+                </span>
+                Qulification:
+                <span>
+                  <b>{{agent.occupation}}</b>
+                </span>
+              </div>
+
+              <!-- <div class="con-bar">
+                <span class="text-bold">
+                  <i class="" aria-hidden="true"></i>
+                </span>
+                Qualification:
+                <span>
+                  <b>{{agent.occupation}}</b>
+                </span>
+              </div> -->
+            </div>
+
+            <!-- <div class="right-part">
+
+              <div>
+                <button type="button" class="btn btn-danger btn-xs btn-del">
+                  <i class="fa fa-trash-o" (click)="deleteAgents(agent.propertyid,agent.agentuserid,agent.propertyname)" aria-hidden="true"></i>
+                </button>
+
+              </div>
+            </div> -->
+            <div id="moredetails">
+              <button class="morebutton" data-toggle="modal" data-target="#myModal" (click)="agentDetails(agent.id)">Agent Details</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

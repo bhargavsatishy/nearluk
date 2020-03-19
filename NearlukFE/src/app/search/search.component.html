@@ -1,0 +1,247 @@
+
+<div style="align-content: center" *ngIf="optionPropertyType?.length==0">
+  <div id="noPropText">
+    <img src="../../../assets/images/nofavourites.png" class="img-fluid" style="width:100%;height:500px" />
+
+  </div>
+</div>
+
+<div class="containt-fluid" style="margin-top:10%;" *ngIf="optionPropertyType?.length!=0">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="container-fluid " id="style-1" infiniteScroll [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
+        style="height: 900px; overflow-y: scroll; overflow-x: hidden;">
+        <div class="card zoom search-card" style="width:110%;" *ngFor="let nls of optionPropertyType" id="homecard"
+          (mouseover)="mouseovershowonmap(nls.latitude,nls.longitude,infoWindow,gm)">
+          <div class="container2">
+
+
+            <img [src]=nls.img (click)="moredetails(nls.propertyid)" alt="user image" width="100%" height="200px" />
+            <div class="img_hoverlay transition_3s radius_5 text-center">
+              <div class="tooltip1">
+                <i class="fa fa-eye" style="color:#17a2b8" aria-hidden="true" *ngIf="nls.user__id!=null">
+                  <span class="tooltiptext">
+                    Viewed
+                  </span>
+                </i>
+
+              </div>
+              <div class="tooltip2">
+                <i class="fa fa-phone" style="color:#17a2b8; margin-left: 120px" aria-hidden="true"
+                  *ngIf="nls.contactviewed!=null">
+                  <span class="tooltiptext2" style="margin-left: -120px">
+                    ContactViewed
+                  </span>
+                </i>
+
+              </div>
+              <div class="content1">
+                <div class="vertical-center">
+                  <h6>NearLuk</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <h5 id="username" title={{nls.propertyname|titlecase}} (click)="moredetails(nls.propertyid)">
+                  {{((nls.propertyname?.length>10)?(nls.propertyname|slice:0:10)+'...':(nls.propertyname)) | titlecase}}
+                </h5>
+                <b>Type :</b>
+                {{((nls.propertytype?.length>10)?(nls.propertytype|slice:0:10)+'...':(nls.propertytype))}}
+                <br>
+                <b>Rent :</b> {{nls.country_currency_symbol}} {{nls.price}}/{{nls.rentalperiod}}
+                <br />
+                <b>Area :</b> {{((nls.areaname?.length>10)?(nls.areaname|slice:0:10)+'...':(nls.areaname))}}
+                <br />
+                <div id="date">
+                  <b id="Date">Posted on :</b> {{nls.posteddate | date : 'dd/MM/yyyy'}}
+
+                </div>
+
+                <span class="check"
+                  *ngIf="nls.propertyid !=compare1 && nls.propertyid !=compare2 && nls.propertyid !=compare3">
+                  <input type="checkbox" #chk [value]="nls.propertytype" (click)="checkedd(nls.propertyid, chk )">Add to
+                  Compare
+                </span>
+                <div class="check"
+                  *ngIf="nls.propertyid ==compare1|| nls.propertyid ==compare2|| nls.propertyid ==compare3">
+                  <input type="checkbox" #checked [value]="nls.propertytype"
+                    (click)="checkedd(nls.propertyid, checked )" checked>Add to Compare
+                </div>
+
+                <div class="row" style="margin:0px;">
+                  <div class="footer-bar-card">
+
+                    <button class="btn btn-info" (click)="moredetails(nls.propertyid)">More Details</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <p-dialog header="Previous Bids" [(visible)]="bidding" [modal]="true" [contentStyle]="{'max-height':'50vh'}"
+        [blockScroll]="true" [width]="500" [draggable]="false">
+        <div class="col-md-12">
+          <b>Base Price : &nbsp;{{baseprice}}</b>
+          <br>
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Bid Date</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let bid of bidprice">
+                <tr>
+                  <td> {{bid.name}}</td>
+                  <td>{{bid.biddingprice}}</td>
+                  <td>{{bid.biddingdate | date}}</td>
+                  <div>
+                    <span type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+                      (click)="GetUserDetails(bid.userid)" id="detailsbtn">Details
+                    </span>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <div class="col-md-12">
+
+            <div class="row">
+              <b>Post Bidding :</b>
+              <div class="col-md-4" c id="bidbox">
+                <input type="text" class="form-control" autocomplete="off" #Biddingprice="ngModel" maxlength="10"
+                  pattern="[0-9]*" [(ngModel)]="Bidd.biddingprice" name="Biddingprice" required />
+
+                <span [hidden]="!Biddingprice.errors.pattern" style="color: red">enter valid price</span>
+
+              </div>
+              <div id="bid">
+                <button class="btn btn-primary" (click)="btnprice(Biddingprice)">Submit</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </p-dialog>
+      <p-dialog header="User Details" [(visible)]="userdetailsbidding" [modal]="true" [width]="400"
+        [contentStyle]="{'max-height':'200px'}">
+        <div *ngFor="let detail of details">
+          User Name: {{detail.name}}
+          <br> Mobile Number: {{detail.mobile}}
+          <br> User Email: {{detail.email}}
+          <br>
+        </div>
+      </p-dialog>
+    </div>
+    <div class="col-md-8" *ngIf="optionPropertyType?.length!=0">
+        <div class="card map-card">
+          <div class="card-body">
+            <div id="agmap">
+              <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]='30'>
+                <agm-marker *ngFor="let m of optionPropertyType; let i = index" [latitude]="m.latitude"
+                  [longitude]="m.longitude" (mouseOver)="onMouseOver(infoWindow,gm,m.propertyid)"
+                  (mouseOut)="onMouseOverout(infoWindow,gm)">
+                  <agm-info-window [disableAutoPan]="true" id="hovercard" #infoWindow>
+                    <div *ngIf='propertymap!=null'>
+                      <div class="row" (click)="moredetails(propertymap.id)">
+                        <div class="col-md-6">
+                          <img class=" " [src]=propertymap.img alt="Property image" width="100%;" height="100%;" />
+                        </div>
+                        <div class="col-md-6">
+                          <table class="table" class="noborder">
+                            <thead>
+                              <tr>
+                                <th colspan="2">{{propertymap.propertyname|titlecase}}</th>
+                              </tr>
+                              <hr>
+                            </thead>
+  
+                            <tr>
+                              <th>Price</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.price}}</td>
+                            </tr>
+                            <tr>
+                              <th>Duration</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.rentalperiod}}</td>
+                            </tr>
+                            <tr>
+                              <th>Available date</th>&nbsp;:&nbsp;
+                              <td *ngIf="propertymap.available!=null">
+                                {{propertymap.available | date}}
+                              </td>
+                              <td *ngIf="propertymap.available==null">
+                                NA
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Posted date</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.posteddate | date }}</td>
+                            </tr>
+                            <tr>
+                              <th>Area</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.propertyarea}}/Square Feets</td>
+                            </tr>
+                            <tr>
+                              <th>Type</th>&nbsp;:&nbsp;
+                              <td>{{propertymap.propertytype}}</td>
+                            </tr>
+                          </table>
+                        </div>
+  
+                      </div>
+                    </div>
+                  </agm-info-window>
+  
+                  <!-- <agm-info-window [disableAutoPan]="true" id="hovercard" #infoWindow>
+  
+                    <div *ngIf='propertymap!=null'>
+                      <a (click)="onClickInfoView({id:m.id})" class="btn btn-attention pull-right">
+  
+                        <div class="card">
+  
+                          <img [src]=propertymap.img alt="user image" />
+                          <div class="card-body">
+                            <h4 class="card-title"> Property Name:{{propertymap.propertyname}}</h4>
+                            <p class="card-text">Price:{{propertymap.price}}</p>
+                            <p class="card-text">Description:{{propertymap.description}}</p>
+                            <p class="card-text">Posted Date:{{propertymap.posteddate | date : 'dd/MM/yyyy'}}</p>
+                            <p class="card-text">Property Area:{{propertymap.propertyarea}}/Square Feets</p>
+                            <p class="card-text">Construction Status:{{propertymap.constructionstatus}}</p>
+                            <p class="card-text">Security Deposit:{{propertymap.securitydeposit}}</p>
+                            <p class="card-text">Maintainance Cost:{{propertymap.maintainancecost}}</p>
+                            <p class="card-text">Rental Period:{{propertymap.rentalperiod}}</p>
+                            <p class="card-text">Property Type:{{propertymap.propertytype}}</p>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+  
+                  </agm-info-window> -->
+                </agm-marker>
+  
+              </agm-map>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<br>

@@ -1,0 +1,18 @@
+/* #head{
+    text-align: center;
+} */
+.for_agents{
+    background-color:#edefef;
+    padding:20px;
+    width:100%;
+    padding-top:100px;
+}    
+.text {
+    text-align: justify;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+    

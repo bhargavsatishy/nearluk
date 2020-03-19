@@ -1,0 +1,119 @@
+agm-map {
+  height: 600px;
+}
+.search-card{
+  margin-top: 5%;
+}
+.map-card{
+  margin-bottom: 10px;
+  width: 100%;
+
+}
+.map-header{
+  text-align: center;
+  font-size: 25px;
+  color:#17a2b8;
+}
+
+
+
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+.row{
+  margin-right:0 !important
+}
+
+
+
+
+
+
+.container2 {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  }
+  
+  
+  
+  .container2 .content1 {
+  position: absolute;
+  bottom: 0;
+  
+  color:  rgba(255, 255, 255, .4);
+  width: 100%;
+  padding: 50%;
+  }
+
+
+
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+} 
+
+
+.img_hoverlay {
+  color: #fff;
+  left: 5%;
+  position: absolute;
+  top: 85%;
+  min-width: 220px;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.tooltip1 {
+  position: absolute;
+  display: inline-block;
+}
+
+.tooltip1 .tooltiptext {
+  visibility: hidden;
+    color:  white;
+}
+
+.tooltip1:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+.tooltip2 {
+  margin-left: 75%;
+  position: absolute;
+  display: inline-block;
+}
+
+.tooltip2 .tooltiptext2 {
+  visibility: hidden;
+    color:  white;
+}
+
+.tooltip2:hover .tooltiptext2 {
+  visibility: visible;
+}

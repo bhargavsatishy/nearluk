@@ -1,0 +1,646 @@
+<div class="col-lg-10 col-md-12 mx-auto top-header" style="margin-top: 10%">
+  <mat-horizontal-stepper linear #stepper id="matstep">
+    <mat-step [stepControl]="firstFormGroup" [completed]="false">
+      <form #firstFormGroup="ngForm">
+        <ng-template matStepLabel>Property Details</ng-template>
+
+        <div class="card my-card">
+          <div class="card-header">Property Details</div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <select id="inputfields" name="propertytype" autocomplete="off" class="form-control"
+                  #property_type="ngModel" [(ngModel)]="property.propertyTypeId" #propertyTypeId
+                  (change)="getAmentiesfacilities(propertyTypeId)" (change)='changepreference(propertyTypeId)' required>
+                  <option [ngValue]="undefined" hidden selected>
+                    <b>Select Property Type *</b>
+                  </option>
+                  <option class='option' *ngFor='let PropertyType of optionPropertyType' [value]="PropertyType.id">
+                    {{PropertyType.propertytype}}</option>
+                </select>
+                <span *ngIf="property_type.touched && property_type.invalid" class="text-danger">
+                  Please select the property type
+                </span>
+              </div>
+              <div class="col-lg-6">
+                <input id="inputfields" type="text" name="price" autocomplete="off" #price="ngModel" maxlength="15"
+                  [(ngModel)]="property.price" class="form-control" placeholder="Rental Price *" pattern="[0-9]*"
+                  required />
+                <span *ngIf="price.errors && (price.touched || price.dirty)" class="text-danger">
+                  <span [hidden]="!price.errors.required">Enter valid rental price</span>
+                  <span [hidden]="!price.errors.pattern">Accepts only numeric values</span>
+                </span>
+              </div>
+
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+
+              <div class="col-lg-6">
+                <input type="text" name="propertyName" class="form-control" #propertyName="ngModel" minlength="3"
+                  maxlength="40" [(ngModel)]="property.propertyName" placeholder="Property Name *" required
+                  pattern="[^ 0~!@#$%&*:()=;^][ a-zA-Z0-9,./:]*" required />
+                <span *ngIf="propertyName.errors && (propertyName.touched || propertyName.dirty)" class="text-danger">
+                  <span [hidden]="!propertyName.errors.required">Please enter valid name</span>
+                  <span [hidden]="!propertyName.errors.minlength">Minimum 2 or more characters </span>
+                  <br>
+                  <span [hidden]="!propertyName.errors.pattern">Numbers and special symbols are not allowed</span>
+                </span>
+              </div>
+              <div class="col-lg-6">
+                <input id="inputfields" type="text" pInputText pKeyFilter="pint" name="securityDeposit"
+                  autocomplete="off" #securityDeposit="ngModel" maxlength="10" [(ngModel)]="property.securityDeposit"
+                  class="form-control" placeholder="Security Deposit" pattern="[0-9]*"
+                  [ngModelOptions]="{standalone: true}" required />
+                <!-- <span *ngIf="securityDeposit.errors && (securityDeposit.touched || securityDeposit.dirty)" class="text-danger">
+                  <span [hidden]="!securityDeposit.errors.required">Please enter security deposit</span>
+                  <span [hidden]="!securityDeposit.errors.pattern">Accepts only numeric values</span>
+                </span> -->
+              </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row">
+
+              <div class="col-lg-6">
+
+                <select id="inputfields" name="facing" autocomplete="off" class="form-control" #facing="ngModel"
+                  [(ngModel)]="property.facing" required>
+                  <option [ngValue]="undefined" hidden selected>Select Facing *</option>
+                  <option value="East">East</option>
+                  <option value="West">West</option>
+                  <option value="South">South</option>
+                  <option value="North">North</option>
+                  <option value="South East">South East</option>
+                  <option value="South West">South West</option>
+                  <option value="North East">North East</option>
+                  <option value="North West">North West</option>
+                </select>
+                <span *ngIf="facing.touched && facing.invalid" class="text-danger">
+                  Please select facing
+                </span>
+              </div>
+              <div class="col-lg-6">
+                <input id="inputfields" type="text" pInputText pKeyFilter="pint" name="maintainanceCost"
+                  autocomplete="off" #maintainanceCost="ngModel" maxlength="10" [(ngModel)]="property.maintainanceCost"
+                  pattern="[ 0-9]*" class="form-control" placeholder="Maintenance Cost"
+                  [ngModelOptions]="{standalone: true}" required />
+              </div>
+
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+
+              <div class="col-lg-6">
+                <input id="inputfields" type="text" name="propertyArea" pInputText pKeyFilter="pint" autocomplete="off"
+                  #propertyArea="ngModel" maxlength="10" [(ngModel)]="property.propertyArea" class="form-control"
+                  placeholder="Property Area Square Feets *" pattern="[0-9]*" required />
+                <span *ngIf="propertyArea.errors && (propertyArea.touched || propertyArea.dirty)" class="text-danger">
+                  <span [hidden]="!propertyArea.errors.required">Please enter the valid dimension</span>
+                  <span [hidden]="!propertyArea.errors.pattern">Accepts only numeric values </span>
+                </span>
+              </div>
+              <div class="col-lg-6">
+
+
+                <select id="inputfields" name="constructionStatus" autocomplete="off" class="form-control"
+                  #construction_status="ngModel" [(ngModel)]="property.constructionStatus" required>
+                  <option [ngValue]="undefined" hidden selected> Select Construction Status *</option>
+                  <option value="underconstruction">underconstruction</option>
+                  <option value="completed">completed</option>
+                </select>
+                <span *ngIf="construction_status.errors && (construction_status.touched || construction_status.dirty)"
+                  class="text-danger">
+                  <span [hidden]="!construction_status.errors.required">Please select construction status</span>
+                </span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+
+              <div class="col-lg-6">
+                <div class="form-group form-group-sm">
+                  <label for="firstname" class="control-label" style="width:100%;">Select Available from date</label>
+                  <p-calendar name="available" placeholder="Available from" #available=ngModel class="calender-ui"
+                    [(ngModel)]="property.available" appendTo="body" [style]="{'width':'100%'}"
+                    [inputStyle]="{'width':'100%'}" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true">
+                  </p-calendar>
+                </div>
+
+              </div>
+
+
+
+
+              <div class="col-lg-6">
+
+                <div class="form-group form-group-sm">
+                  <label for="firstname" class="control-label">Property Age</label>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <select class=" col-md-4 form-control ddlform-control" id="cntntright" style="margin-left:5px;"
+                        #year name="year" (change)="btnhide(year)">
+                        <option disabled>Years</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12+</option>
+                      </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <select class=" col-md-4 form-control ddlform-control" id="cntntright" style="margin-left:5px;"
+                        #month name="month" (change)="bthchange(year.value,month.value)" *ngIf="agemonth==false">
+                        <option disabled>Months</option>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-lg-6">
+
+                <select id="inputfields" name="preference" autocomplete="off" class="form-control ddlform-control"
+                  #preference="ngModel" [(ngModel)]="property.preference">
+                  <option [ngValue]="undefined" hidden selected>Select preference </option>
+
+                  <option class="option" *ngFor="let prefer of preferences" [value]="prefer.featurename">
+                    {{prefer.featurename}}</option>
+
+                </select>
+
+
+              </div>
+              <div class="col-lg-6">
+
+                <div class="form-group form-group-sm">
+                  <label for="firstname" class="control-label"> Rent per *:</label>
+                  <div class="formtype" [class.has-error]="rentalPeriod.invalid && rentalPeriod.touched">
+
+                    <input id="radio" type="radio" name="rentalPeriod" required #rentalPeriod="ngModel"
+                      [(ngModel)]="property.rentalPeriod" value="hour">
+                    <span id="checkbox"> hour</span>&nbsp;
+                    <input id="radio" type="radio" name="rentalPeriod" required #rentalPeriod="ngModel"
+                      [(ngModel)]="property.rentalPeriod" value="day">
+                    <span id="checkbox"> day</span>&nbsp;
+                    <input id="radio" type="radio" name="rentalPeriod" required #rentalPeriod="ngModel"
+                      [(ngModel)]="property.rentalPeriod" value="week">
+                    <span id="checkbox"> week</span>&nbsp;
+                    <input id="radio" type="radio" name="rentalPeriod" required #rentalPeriod="ngModel"
+                      [(ngModel)]="property.rentalPeriod" value="month">
+                    <span id="checkbox"> month</span>&nbsp;
+                    <input id="radio" type="radio" name="rentalPeriod" required #rentalPeriod="ngModel"
+                      [(ngModel)]="property.rentalPeriod" value="year">
+                    <span id="checkbox"> year</span>
+                    <br>
+
+                    <span *ngIf="rentalPeriod.errors && (rentalPeriod.touched || rentalPeriod.dirty)"
+                      class="text-danger">
+                      <span [hidden]="!rentalPeriod.errors.required">Please choose the rent type</span>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="divider"></div>
+            <div class="row">
+
+
+              <div class="col-lg-8">
+                <div class="form-group form-group-sm">
+                  <label for="firstname" class="control-label">Description</label>
+                  <textarea rows="2" cols="50" #description="ngModel" [(ngModel)]="property.description"
+                    name="description" class="form-control" [ngModelOptions]="{standalone: true}" maxlength="235"
+                    placeholder="Property Description(optional)"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="divider"></div>
+
+            <div class="row" style="margin:0px;">
+
+              <button type="button" class="btn btn-info ml-auto" id="searchicon" mat-button matStepperNext
+                [disabled]="firstFormGroup.invalid">
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="secondFormGroup" [completed]="false">
+      <form #secondFormGroup="ngForm" id="form" name="form" novalidate>
+        <ng-template matStepLabel>Property Address</ng-template>
+        <br />
+
+        <div class="row" style="margin:0px;">
+
+          <div class="col-lg-12 col-md-12  mx-auto">
+            <div class="card my-card">
+              <div class="card-header">Properties Address </div>
+              <div class="card-body">
+                <div class="row" style="margin:0px;">
+                  <!-- <input type="email" class="form-control" id="email" placeholder="Enter Location"> -->
+                  <div class="col-md-12" id="steptwosearch">
+                    <input ngx-google-places-autocomplete #placesRef="ngx-places" class="form-control"
+                      (onAddressChange)="handleAddressChange($event)" />
+                  </div>
+
+
+                </div>
+                <div class="divider"></div>
+
+                <div class="row" style="margin:0px;">
+
+                  <div class="col-lg-6">
+                    <div class="row" style="margin:0px;">
+
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <agm-map class="col-md-12 agm-map" [latitude]="lat" [longitude]="lng">
+                          <agm-marker class="col-md-0" *ngFor="let m of markers; let i = index"
+                            (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
+                            [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+                          </agm-marker>
+                        </agm-map>
+                      </div>
+
+                      <!-- <iframe
+                                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3256.49907184805!2d78.44667571435377!3d17.42694820625111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9154995cf525%3A0x95aeba6ffa5a46d1!2sKoneqto!5e1!3m2!1sen!2sin!4v1553592138033"
+                                      width="100%" height="100%" frameborder="0" style="border:0; min-height:300px;"
+                                      allowfullscreen></iframe> -->
+
+
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-6">
+
+                    <div class="divider"></div>
+                    <div class="row">
+                      <input type="text" pInputText pKeyFilter="pnum" name="countryname" autocomplete="off" pInputText
+                        pKeyFilter="pint" #countryname="ngModel" maxlength="6" [(ngModel)]="postmap.countryname"
+                        required pattern="[0-9]*" class="form-control" placeholder="Country *" disabled />
+
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                      <input type="text" pInputText pKeyFilter="pnum" name="statename" autocomplete="off" pInputText
+                        pKeyFilter="pint" #statename="ngModel" maxlength="6" [(ngModel)]="postmap.statename" required
+                        pattern="[0-9]*" class="form-control" placeholder="State *" disabled />
+
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                      <input type="text" pInputText pKeyFilter="pnum" name="cityname" autocomplete="off" pInputText
+                        pKeyFilter="pint" #cityname="ngModel" maxlength="6" [(ngModel)]="postmap.cityname" required
+                        pattern="[0-9]*" class="form-control" placeholder="City *" disabled />
+
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                      <!-- <input type="email" class="form-control" id="email" placeholder="Property Pincode"> -->
+                      <input type="text" pInputText pKeyFilter="pnum" name="areaname" autocomplete="off" pInputText
+                        pKeyFilter="pint" #areaname="ngModel" maxlength="6" [(ngModel)]="postmap.areaname" required
+                        pattern="[0-9]*" class="form-control" placeholder="Area *" disabled />
+
+                    </div>
+
+                    <div class="divider"></div>
+                    <div class="row">
+                      <input type="text" pInputText pKeyFilter="pnum" name="zipcode" autocomplete="off" pInputText
+                        pKeyFilter="pint" #zipcode="ngModel" maxlength="6" [(ngModel)]="postmap.zipcode" required
+                        pattern="[0-9]*" class="form-control" placeholder="zipcode *" disabled />
+
+                    </div>
+
+                    <div class="divider"></div>
+                    <div class="row">
+                      <!-- <input type="email" class="form-control" id="email" placeholder="Property Address"> -->
+
+                      <input type="text" name="address" autocomplete="off" #address="ngModel"
+                        [(ngModel)]="property.address" class="form-control" placeholder="Property Address *" required
+                        pattern="[^ ~!@$%&()^][ A-Za-z0-9_./#\:*,-]*" required />
+
+                      <span *ngIf="address.errors && (address.touched || address.dirty)">
+                        <span [hidden]="!address.errors.required">address required</span>
+                        <span [hidden]="!address.errors.minlength">min 3 digits</span>
+                        <span [hidden]="!address.errors.pattern">spaces and special symbols are not allowed at beginning
+                        </span>
+                      </span>
+                      <div class="invalid-feedback" *ngIf="!(address.errors && (address.touched || address.dirty))">
+                        <div>please mention your property Address</div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="divider"></div>
+              <div class="row" style="margin-right:20px;">
+                <p style="float:right; text-align:right; margin-right: 20px" class="ml-auto">
+                  <span>
+                    <button class="btn btn-info" id="searchicon" mat-button matStepperPrevious>Back</button>
+                  </span>
+                  &nbsp;
+
+                  <span>
+                    <button *ngIf='property.address==null || postmap.countryname==null' type="button"
+                      class="btn btn-info" id="searchicon" mat-button matStepperNext [disabled]="!isValid">
+                      Continue</button>
+                    <button *ngIf='property.address!=null && postmap.countryname!=null' type="button"
+                      class="btn btn-info" id="searchicon" mat-button matStepperNext [disabled]="isValid">
+                      Continue</button>
+                  </span>
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+
+
+    <!-- <mat-step [stepControl]="thirdFormGroup" [completed]="false">
+      <form #thirdFormGroup="ngForm">
+        <ng-template matStepLabel>Property Specification</ng-template>
+        <div class="row" style="margin:0px;">
+          <div class="col-lg-12 col-md-12  mx-auto">
+            <div class="card my-card">
+              <div class="card-header">Facilities & Amenties </div>
+              <div class="card-body">
+                <div class="row" style="margin:0px;">
+                  <form #thirdFormGroup="ngForm">
+                    <ng-template matStepLabel>Property Specification</ng-template>
+                    <div class="container" id="stepthree">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row">
+
+                            <div class="col-md-12" *ngFor="let facilities of facilitiesGet" id="facilitiesmain">
+                              <input type="checkbox" id (click)="checkBox(facilities.fid)">
+                              <img [src]="facilities.fimg" width="25px" height="25px" />
+                              <span id="facname">{{facilities.fname|titlecase}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-12" *ngFor="let amenities of amenitiesGet" id="aminitiesmain">
+                              <div>
+                                {{amenities.propertyamenity}}:
+                                <br />
+                                <input type="text" class="form-control" pInputText pKeyFilter="pint" maxlength="5" #va1 (change)="amenity(amenities.id,va1)">
+                              </div>
+
+                            </div>
+                          </div>
+                          <div class="row" style="margin:0px;">
+                            <p style="float:right; text-align:right; margin-top: 10px" class="ml-auto">
+                              <span>
+                                <button class="btn btn-info" id="searchicon" mat-button matStepperPrevious>Back</button>
+                              </span> &nbsp;
+                              <span>
+                                <button class="btn btn-success" id="searchicon" mat-button matStepperNext>
+                                  Continue</button>
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="divider"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <br>
+    </mat-step> -->
+
+    <mat-step [stepControl]="thirdFormGroup" [completed]="false">
+      <form #thirdFormGroup="ngForm">
+        <ng-template matStepLabel>Property Specification</ng-template>
+        <div class="row" style="margin:0px;">
+          <div class="col-lg-12 col-md-12  mx-auto">
+            <div class="card my-card">
+              <div class="card-header">Facilities & Amenities </div>
+              <div class="card-body">
+                <div class="row" style="margin:0px;">
+                  <form #thirdFormGroup="ngForm">
+                    <ng-template matStepLabel>Property Specification</ng-template>
+                    <div class="container" id="stepthree">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row">
+
+                            <div style="font-size:15px;" class="col-lg-6" *ngFor="let facilities of facilitiesGet"
+                              id="facilitiesmain">
+                              <input type="checkbox" id (click)=" checkBox(facilities.fid)">
+                              <img [src]="facilities.fimg" width="25px" height="25px" />
+                              <span id="facname">{{facilities.fname}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-12" *ngFor="let amenities of amenitiesGet" id="aminitiesmain">
+                              <div>
+                                {{amenities.propertyamenity}}:
+                                <br />
+                                <input type="text" class="form-control" pInputText pKeyFilter="pint" maxlength="5" #va1
+                                  (change)="amenity(amenities.id,va1)">
+                              </div>
+
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <div class="row" style="margin:0px;">
+                            <p style="float:right; text-align:right; " class="ml-auto">
+                              <span>
+                                <button class="btn btn-info" id="searchicon" mat-button matStepperPrevious>Back</button>
+                              </span> &nbsp;
+                              <span>
+                                <button class="btn btn-info" id="searchicon" mat-button matStepperNext>
+                                  Continue</button>
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="divider"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <br>
+    </mat-step>
+
+
+
+    <!-- <mat-step [stepControl]="fourFormGroup" [completed]="false">
+      <form #fourFormGroup="ngForm">
+        <ng-template matStepLabel>Images & Videos</ng-template>
+        <div>Upload Images :</div>
+        <div class="col-md-5">
+          <p-fileUpload name="demo[]" customUpload="true" (uploadHandler)="onUpload($event)" multiple="multiple" showCancelButton accept="image/*"
+            maxFileSize="5000000">
+            <ng-template pTemplate="content">
+            </ng-template>
+          </p-fileUpload>
+        </div>
+        <div class="col-md-5" id="vdos">
+          <h6>Upload Videos :</h6>
+          <p-fileUpload name="demo[]" [showUploadButton]="isUploadEnable" url="http://localhost:3400/img" #fileUpload (onSelect)="validateFile($event,fileUpload)"
+            customUpload="true" (uploadHandler)="onvideoUpload($event)" maxFileSize="30000000">
+            <ng-template pTemplate="content">
+              <ul *ngIf="uploadedFiles.length && displayvideo">
+                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytess</li>
+              </ul>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+        <br>
+        <div id="fourthstepbtn">
+          &nbsp; &nbsp;
+          <div class="backbtn">
+          </div>
+          <div class="row" style="margin:0px;">
+            <p style="float:right; text-align:right; " class="ml-auto">
+              <span>
+                <button class="btn btn-info" mat-button matStepperPrevious>Back</button>
+              </span>
+              &nbsp;
+              <span id="fourthstepcntnu" *ngIf="showbutton">
+                <button type="button" class="btn btn-info" mat-button (click)="addProperty()">Save
+                </button>
+              </span>
+            </p>
+          </div>
+        </div>
+      </form>
+    </mat-step> -->
+    <mat-step [stepControl]="fourFormGroup" [completed]="false">
+      <form #fourFormGroup="ngForm">
+        <ng-template matStepLabel>Images & Videos</ng-template>
+        <div class="row" style="margin:0px;">
+          <div class="col-lg-12 col-md-12  mx-auto">
+            <div class="card my-card">
+              <div class="card-header">Images and videos uploads </div>
+              <div class="card-body">
+                <div class="row" style="margin:0px;">
+                  <form #thirdFormGroup="ngForm">
+                    <ng-template matStepLabel>Property Specification</ng-template>
+                    <div class="container" id="stepthree">
+                      <div class="row">
+                        <div class="">
+                          <div style="margin-bottom:10px;">Upload Images :</div>
+
+                          <div>
+                            <p-fileUpload name="demo[]" customUpload="true" [showUploadButton]="isUploadEnable"
+                              (uploadHandler)="onUpload1($event)" (onSelect)=imageFile($event,fileUpload)
+                              multiple="multiple" showCancelButton accept="image/*" maxFileSize="5000000" [auto]="true">
+                              <ng-template pTemplate="content">
+                              </ng-template>
+                            </p-fileUpload>
+                          </div>
+
+                          <div style="margin-bottom:10px; margin-top: 10px;">Upload Videos :</div>
+
+                          <div id="vdos">
+
+                            <p-fileUpload name="demo[]" [showUploadButton]="isUploadEnable"
+                              url="http://localhost:3400/img" #fileUpload (onSelect)="validateFile($event,fileUpload)"
+                              customUpload="true" (uploadHandler)="onvideoUpload($event)" maxFileSize="30000000">
+                              <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length && displayvideo">
+                                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytess</li>
+                                </ul>
+                              </ng-template>
+                            </p-fileUpload>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin:0px;">
+                        <div id="fourthstepbtn ">
+                          <p style="text-align:right; margin-top: 20px">
+                            <span>
+                              <button class="btn btn-info fback" mat-button matStepperPrevious>Back</button>
+                            </span>
+                            &nbsp;
+                            <span id="fourthstepcntnu" *ngIf="event!=null && showaddbutton==true">
+                              <button type="button" *ngIf="addbutton==false" class="btn btnsav" mat-button
+                                (click)="addProperty()">Save
+                              </button>
+                            </span>
+                          </p>
+                          <p style="float:right; text-align:right; " class="ml-auto">
+                            <span>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>

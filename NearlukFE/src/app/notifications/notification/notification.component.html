@@ -1,0 +1,116 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="align-center">
+  <h3 align="center" style="color: #17a2b8;padding-right: 10%"><u>Notifications</u></h3><br>
+  <div class="body" *ngFor="let notify of notifications">
+    <div *ngIf="notify.touser_id===userid" style="background-color: rgb(230, 242, 245);">
+      <div *ngIf="notify.notification_type==='favourite'">
+        <h6 style="color:#2c76b4"><b>Favourite</b></h6>
+        <p (click)="moredetails(notify.property_id)"> <img src="../../../assets/images/notify.png"
+            style="width: 40px;border-radius: 50%;"> <b>{{notify.name}}</b>
+          has
+          added
+          <b>{{notify.propertyname}}</b> in his favourites on {{notify.created_on | date:'medium' }}</p>
+      </div>
+      <div *ngIf="notify.notification_type==='bidding'">
+        <h6 style="color:#2c76b4"><b>Bidding</b></h6>
+        <p (click)="moredetails(notify.property_id)"> <img src="../../../assets/images/notify.png"
+            style="width: 40px;border-radius: 50%;"><b>{{notify.name}}</b>
+          has
+          bidded
+          <b>{{notify.propertyname}}</b> in your property on {{notify.created_on | date:'medium'}}
+        </p>
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>
+<div id="notify" class="body" *ngFor="let reqestnoti of requestnotifications">
+  <div *ngIf="reqestnoti.notificationtype=='request'" style="background-color: rgb(230, 242, 245);">
+    <h6 style="color:#2c76b4"><b>Request</b></h6>
+    <p> <img src="../../../assets/images/notify.png" style="width: 40px;border-radius: 50%;"><b
+        (click)="agentprofile(reqestnoti.fromuserid)" style="cursor: pointer;">{{reqestnoti.email}}</b> has send you
+      request for Property
+      {{reqestnoti.propertyname}}
+      <button type="button" pButton icon="pi pi-check"
+        (click)="addAgentRes(reqestnoti.fromuserid,reqestnoti.propertyid,reqestnoti.id)" label="Accept"
+        style="background-color:  green;color: white">Accept</button>
+      <button type="button" pButton icon="pi pi-close"
+        (click)="reject(reqestnoti.fromuserid,reqestnoti.propertyid,reqestnoti.id)" label="Reject"
+        class="ui-button-secondary" style="background-color:  red;color: white">Reject</button>
+    </p>
+  </div>
+  <div *ngIf="reqestnoti.notificationtype==='agentremoved'" style="background-color: rgb(230, 242, 245);">
+    <h6 style="color:#2c76b4">Removed as Agent</h6>
+    <p><img src="../../../assets/images/notify.png" style="width: 40px;border-radius: 50%;">
+      {{reqestnoti.message}}
+    </p>
+  </div>
+  <div *ngIf="reqestnoti.notificationtype=='accept'" style="background-color: rgb(230, 242, 245);">
+    <h6 style="color:#2c76b4"><b>Accepted</b></h6>
+    <p><img src="../../../assets/images/notify.png" style="width: 40px;border-radius: 50%;">
+      <b (click)="agentprofile(reqestnoti.fromuserid)" style="cursor: pointer;">{{reqestnoti.email}}</b> has accepted
+      your request for
+      <b>{{reqestnoti.propertyname}}</b>
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+<p-dialog header="Agent Details" [(visible)]="agentMoreDetails" [modal]="true" [blockScroll]="true" [draggable]="false"
+  [responsive]="true" [maximizable]="false">
+
+
+  <div class="container">
+    <div *ngFor="let profile of agentData">
+      <div class="row">
+        <div class="col-md-4" style="padding-top: 5%">
+          <img [src]="profile.img" class="img-fluid">
+        </div>
+        <div class="col-md-6" id="AgentName">
+          <b> {{profile.name|uppercase}}</b>
+        </div>
+      </div>
+
+      <div class="h6">
+        Profile Info
+      </div>
+      <table>
+
+        <tr>
+          Occupation<td><b>:{{profile.occupation}}</b></td>
+        </tr>
+        <tr>
+          Mobile <td> <b>:{{profile.isd}} {{profile.mobile}}</b></td>
+        </tr>
+        <tr>
+          Email <td><b>:{{profile.email}}</b></td>
+        </tr>
+        <tr>
+          Date of Birth<td><b>:{{profile.dob|date:"dd/MM/yyyy"}}</b></td>
+
+        </tr>
+        <tr>
+          Gender<td><b>:{{profile.gender}}</b></td>
+        </tr>
+        <tr>
+          Address <td><b>:{{profile.address}}</b></td>
+        </tr>
+        <tr>
+          Discription<td><b>:{{profile.discription}}</b></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+
+
+</p-dialog>

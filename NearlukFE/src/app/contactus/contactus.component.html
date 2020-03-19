@@ -1,0 +1,123 @@
+<div class="container-fluid" id="container-2">
+  <br>
+  <div class="row">
+    <div class="col-md-6" >
+      <h3>Get In Touch With Us</h3>
+      <br>
+      <h6 id="text2">
+        <i style="font-size: 13px"> For more information about Nearluk, please contact us. Whether you have a comment or enquiry or suggestion to share
+          with us, we are waiting to hear from you.
+
+        </i>
+      </h6>
+      <br>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-phone-square" style="font-size:30px;color:#0a2541;"></i>
+        </div>
+        <div class="col-md-6">
+          <h6>
+            Call us
+          </h6>
+          <a style="font-size: 75%">+91-40-6610-7755
+            <br> +91-97030-77755</a>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-map-marker" aria-hidden="true" style="font-size:30px;color:#0a2541;"></i>
+        </div>
+        <div class="col-md-8">
+          <h6>
+            Address
+          </h6>
+          <a style="font-size: 75%">Plot No. 62
+            <br> Nagarjuna Hills
+            <br> Punjagutta
+            <br> Hyderabad Telangana</a>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-envelope-square" aria-hidden="true" style="font-size:30px;color:#0a2541;"></i>
+
+        </div>
+        <div class="col-md-4">
+          <h6>
+            Email Us
+          </h6>
+          <a style="font-size: 75%"> info@nearluk.com
+            <br> support@nearluk.com</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6" id="text-right">
+
+
+      <div class="container">
+
+        <form #myFrm="ngForm" id="form" name="form" novalidate>
+
+          <div class="form-group">
+
+            <label for="name"></label>
+
+            <input type="text" style="width:76%;height:27%" class="form-control" #name='ngModel' [(ngModel)]='contact.name' placeholder="Enter Your Name"
+              name="name" maxlength="30" autocomplete="off" name="username" class="form-control" [ngClass]="{'is-invalid':myFrm.submitted && name.invalid}"
+              required pattern="[^ ~0-9!#$%&*()^][ A-Za-z.]*" required />
+            <span *ngIf="name.errors && (name.touched || name.dirty)">
+              <span [hidden]="!name.errors?.required">Please enter the name</span>
+              <span data-toggle="popover" [hidden]="!name.errors?.minlength">Min 3 Chars</span>
+              <br>
+              <span [hidden]="!name.errors?.pattern">This field should accept alphabets only</span>
+            </span>
+            <div class="invalid-feedback" *ngIf="!(name.errors && (name.touched || name.dirty))">
+              <div>Please enter the name</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email"></label>
+            <input type="email" style="width:76%;height:27%" class="form-control" maxlength="50" #email='ngModel' [(ngModel)]='contact.email'
+              placeholder="Enter Your Email" name="email" autocomplete="off" class="form-control" [ngClass]="{'is-invalid':myFrm.submitted && email.invalid}"
+              required pattern="[a-zA-Z0-9!#$%&.'*+-/=?^_`{|}~]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+            <span *ngIf="email.errors && (email.touched || email.dirty)">
+              <span [hidden]="!email.errors?.required">Please enter the email Id</span>
+              <span [hidden]="!email.errors.pattern">Please enter valid email Id</span>
+            </span>
+            <div class="invalid-feedback" *ngIf="!(email.errors && (email.touched || email.dirty))">
+              <div>Please enter the email Id</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="comment"></label>
+            <textarea class="form-control" style="width:76%;" rows="5" #message='ngModel' [(ngModel)]='contact.message' placeholder="Write Your Message"
+              name="message" maxlength="200" pattern="[^ ~!@#$%&*:()=;^][ a-zA-Z0-9,./:]*" [ngClass]="{'is-invalid':myFrm.submitted && message.invalid}"
+              required></textarea>
+            <span *ngIf="message.errors && (message.touched || message.dirty)">
+              <span [hidden]="!message.errors.required">Please enter your message</span>
+              <span [hidden]="!message.errors.pattern">This field should be within 3 - 1000 chars range</span>
+              <br>
+
+              <span [hidden]="!message.errors.minlength">Minimum 2 or more characters</span>
+            </span>
+            <div class="invalid-feedback" *ngIf="!(message.errors && (message.touched || message.dirty))">
+              <div>Please enter your message</div>
+            </div>
+          </div>
+
+          <button  class="btn btn-info" id="submitbutton" [disabled]="myFrm.invalid" (click)="myFrm.invalid?ContectUs(myFrm):ContectUs(myFrm)">Submit</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<app-footer-main></app-footer-main>

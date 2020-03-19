@@ -1,0 +1,80 @@
+.container {
+  width: auto;
+}
+
+.fa {
+  margin-top: 9px;
+}
+
+#android {
+  padding-right: 10px;
+}
+
+#ios {
+  top: 5px;
+}
+
+.footer1 {
+  background-color: #FFFFFF;
+  padding: 30px;
+  border-top: 2px solid #17a2b8;
+  padding-bottom: 5px;
+  position: absolute;
+  z-index: -5;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.f-menu ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+.f-menu ul li {
+  padding: 0px;
+  margin: 0px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.copy-right {
+  width: 100%;
+}
+
+.copy-right p {
+  text-align: left;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.social-icons p {
+  font-size: 20px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.footer-bar1 {
+  border-top: 1px solid #ccc;
+}
+
+a {
+  color: #17a2b8;
+  font-size: 13px;
+}
+
+h6 {
+  font-size: 12px;
+}
+
+p {
+  font-size: 13px;
+}
+
+.f-menu {
+  font-size: 13px;
+}
+
+body {
+  margin-top: 50px;
+  background-color: #f1f1f1;
+}

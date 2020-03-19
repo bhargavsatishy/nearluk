@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@ngx-share/button/themes/default/default-theme';
+@import '~@ngx-share/button/themes/material/material-dark-theme';
+@import '~@ngx-share/button/themes/modern/modern-light-theme';
+@import '~ngx-toastr/toastr.css';
+#toast-container>div {
+    opacity: 1;
+}
+
+body .ui-inputtext:enabled:not(.ui-state-error) {
+    /* border-color: #21212145; */
+    /* height: 40px; */
+    width: 100%;
+}
+
+
+body .ui-inputtext {
+    padding: 0em;
+}
+
+.ui-galleria .ui-galleria-panel {
+    height: 450px;
+    width: 100%;
+}
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0px !important;
+}
+
+.properties .btn {
+    font-size: 17px !important;
+    color: black !important;
+    border-color: white !important
+}
+
+.goog-tooltip {
+    display: none !important;
+}
+
+.goog-tooltip:hover {
+    display: none !important;
+}
+
+.goog-text-highlight {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+    height: 30px;
+    margin: -1px 0 !important;
+    width: 100px;
+}

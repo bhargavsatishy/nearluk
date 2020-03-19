@@ -1,0 +1,134 @@
+<!-- <br/>
+<br/>
+<br/>
+<div style="align-content: center" *ngIf="Propertys?.length==null">
+  <br>
+  <div id="noPropText">
+    <img src="../../../assets/images/nofavourites.png" class="img-fluid" style="width:100%;height:500px">
+  </div>
+  <br />
+</div>
+
+<section>
+    <div class="loading" >
+      <div class="container py-3">
+        <div class="card card1" *ngFor="let Enquiry of Propertys">
+          <div class="row " style="margin:0px;">
+            <div class="col-lg-4 col-md-12">
+              <div id="pimg">
+                <img [src]=Enquiry.img alt="user image" width="90%" height="200px" />
+              </div>
+            </div>
+            <div class=" col-lg-8 col-md-12 px-3">
+              <div class="card-block px-3">
+                <div class="row">
+                  <h5 id="username" (click)="MoreDetails(Enquiry.propertyid,Enquiry.userid)">
+                    {{((Enquiry.propertyname?.length>20)?(Enquiry.propertyname|slice:0:20)+'...':(Enquiry.propertyname)) |
+                      titlecase}}
+                  </h5>
+                  <div class="col-md-1" id="stamp" *ngIf="Enquiry.nearlukverified==='V'">
+                    <img src="../../../assets/images/stamp.png" alt="user image" height="60px" width="60px" />
+                  </div>
+                </div>
+                <div class="row">
+                  <h6>Type :</h6>
+                  <span>{{Enquiry.propertytype}}</span>
+                </div>
+                <div class="row">
+                  <h6>City :</h6>
+                  <span>{{Enquiry.cityname}}</span>
+                </div>
+  
+                <div class="row">
+  
+                  <h6>Price :</h6>
+                  <span>{{Enquiry.price}}/{{Enquiry.rentalperiod}}</span>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+
+<div style="align-content: center;margin-top: 10%" *ngIf="noDataImage ==true">
+  <div id="noPropText">
+    <img src="../../../assets/images/no properties.png" class="img-fluid" alt="No recommendations.."
+      style="width:100%;height:600px">
+  </div>
+</div>
+
+
+<div class="containt-fluid" style="margin-top:100px;">
+  <div class="loading" id="style-1" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()" [scrollWindow]="false" style="height: 900px; overflow-y: scroll;">
+    <div class="row" id="recom">
+      <div class="col-lg-3" *ngFor="let Enquiry of Propertys">
+
+        <div class="card" width="100%">
+          <div class="card-body">
+            <div class="img-wrapper">
+              <img [src]=Enquiry.img (click)="MoreDetails(Enquiry.propertyid)" style="width: 100%;">
+              <div class="img_hoverlay transition_3s radius_5 text-center">
+                <div class="tooltip1">
+                  <i class="fa fa-eye" style="color:#17a2b8" aria-hidden="true" *ngIf="Enquiry.userviewd!=null">
+                    <span class="tooltiptext">
+                      Viewed
+                    </span>
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="data-field ">
+              <div class="name-field">
+                <h6>
+                  <span>
+                    <i aria-hidden="true" (click)="MoreDetails(Enquiry.propertyid,Enquiry.userid)"></i>
+                  </span>
+                  {{((Enquiry.propertyname?.length>20)?(Enquiry.propertyname|slice:0:20)+'...':(Enquiry.propertyname)) | titlecase}}
+                </h6>
+              </div>
+              <div class="date-field">
+                <h6>
+                  <span>
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span> {{Enquiry.posteddate | date }}</h6>
+              </div>
+            </div>
+            <div class="row mid-con" style="margin:0px;">
+              <div class="left-part">
+                <div class="con-bar">
+                  <span class="text-bold">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  </span>
+                  <span> {{Enquiry.areaname}}</span>
+                </div>
+                <div class="con-bar">
+                  <span class="text-bold"></span>
+                  <i class="fa fa-th-large" aria-hidden="true"></i>
+                  <span> {{Enquiry.propertytype}}</span>
+                </div>
+                <div class="con-bar">
+                  <span class="text-bold">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                  </span>
+                  <span>
+                    {{Enquiry.price}}/{{Enquiry.rentalperiod}} </span>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin:0px;">
+              <div class="footer-bar-card">
+                <span class="more-del" (click)="MoreDetails(Enquiry.propertyid)">More Details </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

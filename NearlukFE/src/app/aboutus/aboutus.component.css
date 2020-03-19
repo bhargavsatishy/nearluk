@@ -1,0 +1,124 @@
+
+body {
+    background-color:#edefef;
+}
+
+ .service-con p {
+    text-align: center;
+    font-weight: 400;
+    font-size: 26px;
+} 
+
+.service-con h2 {
+    text-align: center;
+          font-weight: 800;
+    color: #17a2b8;
+}
+
+.top-gap{
+padding-top:100px;
+    background-color: #fafbfd;
+}
+
+
+.main-ul {
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.main-ul ul {
+    padding: 0px;
+    margin: 0px;
+}
+.main-ul ul li {
+
+    width: 33%;
+    padding: 20px;
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #f3f4f8;
+    cursor: pointer;
+        min-height: 300px;
+    overflow: hidden;
+    margin-right: 3px;
+
+}
+.main-ul ul li p {
+    text-align: center;
+}
+.main-ul ul li h2 {
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.main-ul ul li:hover {
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+
+
+.why_us{
+background-color:#edefef;
+padding:20px;
+width:100%;
+padding-top:60px;
+padding-bottom:40px;
+
+
+}
+
+.about_us{
+background-color:#edefef;
+padding:20px;
+width:100%;
+padding-top:100px;
+
+
+}
+
+
+.small-text{
+    color: #17a2b8;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.mid-content{
+margin-top:60px;
+margin-bottom:40px;
+background-color: #fafbfd;
+padding-top: 35px;
+padding-bottom:5px;
+}
+
+.about_us h4 {
+font-size:40px;
+}
+
+.why_content h4{
+font-size:40px;
+}
+
+
+.containt-fluid{
+    margin-top: 50px;
+}
+.text{
+    text-align: justify;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-ul ul li {
+    width: 100%;
+    padding: 20px;
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #f3f4f8;
+    cursor: pointer;
+    min-height: 300px;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,182 @@
+
+<div class="container" style="margin-top: 10%">
+  <div class="card" id="main">
+    <h5 class="card-header" style="background:#17a2b8 ;color:white">Enquiry Criteria</h5>
+    <div class="card-body">
+      <div class="container-fluid" id="enquiry-form">
+
+
+        <form #myFrm="ngForm" (ngSubmit)="myFrm.form.valid && AddEnquiryFormData(myFrm.value)" id="form" name="form" novalidate>
+          <div class="row" id="enquiry">
+            <div class="col-md-3" id="leftform">
+
+              <div>
+                Country :
+                <span style="color: red"> *</span>
+                <select name="countryname" class="form-control" #countryname="ngModel" [(ngModel)]="enqform.countryname" (change)="optionstate(countryname.value)"
+                  [ngClass]="{'is-invalid':myFrm.submitted && countryname.invalid}" required>
+                  <option class='option' *ngFor='let option of options' [value]="option.id">{{option.countryname}}
+                  </option>
+                </select>
+
+                <span *ngIf="countryname.touched && countryname.invalid">
+                  select country
+                </span>
+                <div class="invalid-feedback" *ngIf="!(countryname.errors && (countryname.touched || countryname.dirty))">
+                  <div>select country</div>
+                </div>
+              </div>
+              <br>
+
+              <div>
+                Property Type :
+
+                <select name="propertytypeid" class="form-control " #propertytypeid="ngModel" [(ngModel)]="enqform.propertytypeid">
+                  <option value="" hidden selected>
+                    Select Property Type
+                  </option>
+                  <option class='option' *ngFor='let option of pTypes' [value]="option.id">{{option.propertytype}}
+                  </option>
+
+                </select>
+
+              </div>
+              <br>
+
+            </div>
+
+            <div class="col-md-3">
+              <div>
+                State :
+                <span style="color: red"> *</span>
+                <select name="statename" class="form-control" id="statename" #statename="ngModel" [(ngModel)]="enqform.statename" [ngClass]="{'is-invalid':myFrm.submitted && statename.invalid}"
+                  (change)="optioncity(statename.value)" required>
+                  <option value="" hidden selected>
+                    Select State
+                  </option>
+                  <option class='option' *ngFor='let option1 of optionsstate' [value]="option1.id">{{option1.statename}}
+                  </option>
+                </select>
+
+                <span *ngIf="statename.touched && statename.invalid">
+                  select state
+                </span>
+                <div class="invalid-feedback" *ngIf="!(statename.errors && (statename.touched || statename.dirty))">
+                  <div>select state</div>
+                </div>
+              </div>
+              <br>
+
+
+              <div>
+                Min Price :
+
+                <select name="minprice" class="form-control " #minprice="ngModel" [(ngModel)]="enqform.minprice" (change)="storemin(minprice.value)">
+                  <option value="" hidden selected>
+                    Min Price
+                  </option>
+
+                  <option class='option3' *ngFor='let option3 of price' [value]="option3.opt">{{option3.opt}}</option>
+
+
+                </select>
+
+              </div>
+
+              <br>
+
+              <br>
+            </div>
+
+            <div class="col-md-3" id="leftform">
+              <div>
+                City :
+                <span style="color: red"> *</span>
+                <select name="cityname" class="form-control" id="cityname" #cityname="ngModel" [(ngModel)]="enqform.cityname" [ngClass]="{'is-invalid':myFrm.submitted && cityname.invalid}"
+                  (change)="optionarea(cityname.value)" required>
+                  <option class='option' *ngFor='let option2 of optionscity' [value]="option2.id">{{option2.cityname}}
+                  </option>
+
+                </select>
+                <span *ngIf="cityname.touched && cityname.invalid">
+                  select city
+                </span>
+                <div class="invalid-feedback" *ngIf="!(cityname.errors && (cityname.touched || cityname.dirty))">
+                  <div>select city</div>
+                </div>
+              </div>
+              <br>
+
+              <div>
+
+                Max Price :
+                <select name="maxprice" class="form-control " #maxprice="ngModel" [(ngModel)]="enqform.maxprice">
+                  <option value="" hidden selected>
+                    Max Price
+                  </option>
+                  <option class='option4' *ngFor='let option4 of maxpricee' [value]="option4">{{option4}}</option>
+
+                </select>
+
+              </div>
+
+              <br>
+            </div>
+            <div class="col-md-3" id="leftform">
+              <div>
+                Area :
+                <select name="areaname" class="form-control" #areaname="ngModel" placeholder="Select Area" [(ngModel)]="enqform.areaname">
+
+                  <option class='option' *ngFor='let option2 of optionsarea' [value]="option2.id">{{option2.areaname}}
+                  </option>
+
+                </select>
+
+              </div>
+              <br>
+
+              <div>
+                Facing :
+
+                <select name="property_spec" class="form-control" #facing="ngModel" placeholder="Select Facing" [(ngModel)]="enqform.facing"
+                  required>
+                  <option value="null" hidden selected>Select Facing </option>
+
+                  <option value="East">East</option>
+                  <option value="West">West</option>
+                  <option value="South">South</option>
+                  <option value="North">North</option>
+                  <option value="southeast">South East</option>
+                  <option value="southwest">South West</option>
+                  <option value="northeast">North East</option>
+                  <option value="northwest">North West</option>
+
+                </select>
+
+              </div>
+
+              <br>
+
+            </div>
+            <div class="offset-md-4 col-md-8 col-xs-8 col-lg-8">
+              <div class="row" id="buttons">
+
+
+                <button *ngIf="!showSaveUpdate" type="submit" class="btn btn-info" (click)="AddEnquiryFormData(myFrm)" style="margin:0px 10px 0px 10px ">Search</button>
+
+                <button *ngIf="showSaveUpdate" type="submit" class="btn btn-info" (click)="SearchUpdate(myFrm)" style="margin:0px 10px 0px 10px ">Search</button>
+
+                <button type="reset" value="Reset" class="btn btn-warning" style="margin:0px 10px 0px 10px ">Reset</button>
+
+                <button type="reset" value="Cancel" (click)="homeNavigate()" class="btn btn-danger" style="margin:0px 10px 0px 10px ">cancel</button>
+
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

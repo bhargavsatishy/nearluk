@@ -1,0 +1,418 @@
+#facility1{
+  padding: 10px;
+}
+input[type="checkbox"]{
+  width: 15px;
+  height: 15px; 
+  padding-top:30%;
+   }
+
+#check{
+  padding-top:5px;
+  padding-right: 15px;
+ 
+}
+#amenities{
+  padding: 10px;
+}
+#facname{
+    padding: 5px;
+}
+#facilitiesmain{
+    padding-left:30px;
+}
+
+#updateproperty{
+  padding:5% 0% 3% 0%;
+background-color: white;
+border-radius: 20px;
+margin-top:10%;
+}
+
+#rent{
+padding-top:3%;
+}
+
+
+/* responce code */
+
+
+/* @media screen and (min-device-width:320px) and (max-device-width:600px){
+  #updateproperty{
+    padding-top:400px!important;
+ }
+ }
+
+ @media screen and (min-device-width:601px ) and (max-device-width:768px){
+  #updateproperty{padding-top:290px;
+ }
+   }
+
+@media screen and (min-device-width:769px ) and (max-device-width:992px){
+  #updateproperty{padding-top:250px;
+ }
+   }
+
+@media screen and (min-device-width:992px ) and (max-device-width:1200px){
+  #updateproperty{padding-top:120px;
+ }
+   } */
+
+
+
+   /*---------------------------- new page--------------------------------------*/
+
+   .card-body {
+    padding: 5px;
+    color: #053535;
+  }
+  body {
+    background-color: #edefef;
+  }
+  .card {
+    margin-top: 20px;
+    margin-bottom: 60px;
+    box-shadow: 0px 20px 45px 0 rgba(27, 29, 67, 0.1);
+  }
+  .text-center {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .text-center h3 {
+    text-align: center;
+    color: #00a5a9;
+  }
+  .logo img {
+    width: 50px;
+    height: 50px;
+    background-color: #999999;
+    margin: auto;
+  }
+  .btn-forget {
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  img-wrapper {
+    width: 100%;
+    padding: 0px;
+  }
+  /* =================================  */
+  
+      .data-field {
+    width: 100%;
+    padding: 15px;
+    /* margin: 10px; */
+        display: block;
+    overflow: hidden;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 8px;
+  }
+  .name-field {
+    width: 50%;
+    display: inline-block;
+    float: left;
+  }
+  .date-field {
+    width: 50%;
+    display: inline-block;
+    float: right;
+    text-align: right;
+  }
+  .date-field h6 {
+    font-size: 13px;
+  }
+  .name-field h6 {
+    font-size: 13px;
+  }
+  .right-part {
+    float: right;
+    width: 40%;
+    text-align: right;
+    font-size: 13px;
+  }
+  .left-part {
+    float: left;
+    width: 60%;
+    text-align: left;
+    font-size: 13px;
+  }
+  .mid-con {
+    padding: 15px;
+  }
+  .btn-edit {
+    padding: 2px 8px;
+    border-radius: 0px;
+    margin-bottom: 3px;
+  }
+  .btn-del {
+    padding: 2px 8px;
+    border-radius: 0px;
+  }
+  .text-bold {
+    font-weight: bold;
+  }
+  .con-bar {
+    margin-bottom: 5px;
+  }
+  .footer-bar-card {
+    border-top: 1px solid #ebebeb;
+    padding: 15px;
+    display: block;
+    width: 100%;
+  }
+  .more-del {
+    font-size: 13px;
+    float: left;
+    color: #ffff;
+    background-color: #17a2b8;
+    padding: 8px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  .more-del:hover {
+    color: #b3d7ff;
+  }
+  .add-agent:hover {
+    color: #b3d7ff;
+  }
+  .add-agent {
+    font-size: 13px;
+    float: right;
+    color: #ffff;
+    background-color: #17a2b8;
+    padding: 8px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  .card:hover {
+    margin-bottom: 60px;
+    box-shadow: 0px 30px 55px 0 rgba(27, 29, 67, 0.1);
+  }
+  .footer {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-top: 2px solid #17a2b8;
+    padding-bottom: 5px;
+  }
+  .f-menu ul {
+    padding: 0px;
+    margin: 0px;
+  }
+  .f-menu ul li {
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none;
+    list-style: none;
+  }
+  .img-wrapper img {
+   height: 200px;
+  }
+  .f-menu ul li a {
+    padding: 0px;
+    margin: 0px;
+    padding: 4px;
+    display: block;
+    color: #053535;
+  }
+  .copy-right {
+    width: 100%;
+  }
+  .copy-right p {
+    text-align: left;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .bg-dark {
+    box-shadow: 0px 20px 45px 0 rgba(27, 29, 67, 0.1);
+    background-color: #FFFFFF !important;
+  }
+  .navbar-dark .navbar-nav .active>.nav-link,  .navbar-dark .navbar-nav .nav-link.active,  .navbar-dark .navbar-nav .nav-link.show,  .navbar-dark .navbar-nav .show>.nav-link {
+    color: #000 !important;
+  }
+  .navbar-dark .navbar-nav .nav-link:focus,  .navbar-dark .navbar-nav .nav-link:hover {
+    color: #fff !important;
+    background-color: #17a2b8 !important;
+  }
+  .navbar-dark .navbar-nav .nav-link {
+    color: #383d41 !important;
+    padding: 8px;
+  }
+  navbar-dark .navbar-toggler {
+    color: rgb(0, 162, 169);
+    border-color: rgb(0, 163, 170);
+  }
+  .navbar-toggler {
+   padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: #00a5a9;
+    border: 1px solid transparent;
+   border-radius: .25rem;
+  }
+  .social-icons p {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: right;
+  }
+  .footer-bar {
+    border-top: 1px solid #ccc;
+  }
+  .carousel-inner img {
+    width: 100%;
+    height: 600px;
+  }
+  .search-bar {
+    position: absolute;
+    padding: 10px;
+    /* top: 20%; */
+        background-color: #0006;
+    top: 40%;
+    z-index: 99;
+    left: 22%;
+    width: 60%;
+    border-radius: 8px;
+  }
+  .search-input {
+    width: 100%;
+    height: 48px;
+    position: relative;
+  }
+  .search-bar .fa-search {
+    padding: 14px;
+    position: absolute;
+    right: 13px;
+    top: 0px;
+    color: #e9ecef;
+    font-size: 21px;
+    background-color: #007bff;
+    -webkit-border-radius: 8px;
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius: 8px;
+    -moz-border-radius-topleft: 0;
+    border-radius: 8px;
+    border-top-left-radius: 0;
+  }
+  .search-btn {
+    width: 100%;
+    padding: 8px;
+    background-color: transparent !important;
+    border: none;
+    color: #fff;
+    font-weight: 400;
+  }
+  .search-btn:hover {
+    text-decoration: underline;
+    font-weight: 400;
+  }
+  .header-text {
+    position: absolute;
+    padding: 10px;
+    /* top: 20%; */
+        background-color: #0006;
+    top: 20%;
+    z-index: 99;
+    left: 22%;
+    width: 60%;
+    border-radius: 8px;
+  }
+  .header-text h3 {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 35px;
+  }
+  .header-text p {
+    text-align: center;
+    color: #FFFFFF;
+  }
+  .ad-popup {
+    border-radius: 0px !important;
+    background-color: #4f5354b8 !important;
+  }
+  .ad-popup .modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #e9ecef;
+   border-top-left-radius: .3rem;
+   border-top-right-radius: .3rem;
+    background-color: #444a4f;
+    color: white;
+  }
+  .advance-text p {
+    text-align: center !important;
+    color: white;
+    cursor: pointer;
+    padding-top: 8px;
+  }
+  .advance-text p:hover {
+    color: white;
+    text-decoration: underline;
+    font-weight: 400;
+  }
+  .margin-toop {
+    margin-top: 15px;
+  }
+  .divider {
+    border: 1px solid #dee2e626;
+    display: block;
+    clear: both;
+    /* height: 9px; */
+        margin-top: 10px;
+    ;
+  }
+  .btn-close {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .my-card .card-header {
+    background-color: rgb(0, 160, 165);
+    font-size: 18px;
+    color: #fff;
+  }
+  .my-card .card-body {
+    padding: 15px;
+    padding-bottom: 30px;
+  }
+  .btn-right {
+    float: right;
+  }
+  .left-icons {
+    float: left;
+    list-style: none;
+  }
+  .right-icons {
+    float: left;
+  }
+  .left-icons ul li {
+    list-style: none;
+    padding: 5px;
+  }
+  .right-icons ul li {
+    list-style: none;
+    padding: 5px;
+  }
+  .input-group-addon {
+    background-color: #007bff !important;
+    color:#fff !important;
+  }
+  .facilities-bar {
+    width:100%;
+    border-bottom: 1px solid #10707f73;
+  }
+  .faciliti-icons ul {
+    padding:10px;
+    margin:0px;
+  }
+  .faciliti-icons ul li {
+    float:left;
+    display:inline-block;
+    padding:8px;
+  }

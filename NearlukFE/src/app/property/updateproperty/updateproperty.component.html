@@ -1,0 +1,171 @@
+<div class="container">
+    <div class="row" style="margin-top:10%;">
+      <div class="col-lg-10 col-md-12  mx-auto">
+        <div class="card my-card">
+          <div class="card-header">Properties Details</div>
+          <div class="card-body">
+            <div class="divider"></div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group form-group-sm">
+                      <label for="firstname" class="control-label">Price</label>
+                      <div id="price">
+                        <input id="inputfields" type="text" #price="ngModel" [(ngModel)]="propertyDetailsforUpdate.price"
+                          name="price" class="form-control" autocomplete="off" placeholder="Rental price" pattern="[0-9]*"
+                          required />
+                        <span *ngIf="price.errors && (price.touched || price.dirty)" class="text-danger">
+                          <span [hidden]="!price.errors.required">Enter valid rental price</span>
+                          <span [hidden]="!price.errors.pattern">Accepts only numeric values</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="firstname" class="control-label">Security Deposit</label>
+                    <input id="inputfields" type="text" #securitydeposit="ngModel" pInputText pKeyFilter="pint"
+                      [(ngModel)]="propertyDetailsforUpdate.securityDeposit" name="securitydeposit" class="form-control"
+                      placeholder="Security deposit" required />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group form-group-sm">
+                      <label for="firstname" class="control-label">Description</label>
+                      <input type="text" #description="ngModel" [(ngModel)]="propertyDetailsforUpdate.description"
+                        name="description" class="form-control" placeholder="Description" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="firstname" class="control-label">Maintainance Fee</label>
+                    <input id="inputfields" type="text" #maintainancecost="ngModel" pInputText pKeyFilter="pint"
+                      [(ngModel)]="propertyDetailsforUpdate.maintainanceCost" name="Maintainance_Fee" class="form-control"
+                      placeholder="Maintainance fee" required />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group form-group-sm">
+  
+                      <div class="formtype">
+                        <span id="checkbox"> Rent per :</span>&nbsp; <br />
+                        <input id="radio" type="radio" name="rentalPeriod" required #rental_period="ngModel"
+                          [(ngModel)]="propertyDetailsforUpdate.rentalPeriod" value="hour">
+                        <span id="checkbox">hour</span>&nbsp;
+                        <input id="radio" type="radio" name="rentalPeriod" required #rental_period="ngModel"
+                          [(ngModel)]="propertyDetailsforUpdate.rentalPeriod" value="day">
+                        <span id="checkbox">day</span>&nbsp;
+                        <input id="radio" type="radio" name="rentalPeriod" required #rental_period="ngModel"
+                          [(ngModel)]="propertyDetailsforUpdate.rentalPeriod" value="week">
+                        <span id="checkbox">week</span>&nbsp;
+                        <input id="radio" type="radio" name="rentalPeriod" required #rental_period="ngModel"
+                          [(ngModel)]="propertyDetailsforUpdate.rentalPeriod" value="month">
+                        <span id="checkbox">month</span>&nbsp;
+                        <input id="radio" type="radio" name="rentalPeriod" required #rental_period="ngModel"
+                          [(ngModel)]="propertyDetailsforUpdate.rentalPeriod" value="year">
+                        <span id="checkbox">year</span>&nbsp;
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <form class="form-inline center-block well" action="/" method="POST" enctype="multipart/form-data">
+                      <div class="input-group" style="width:100%; margin-bottom:10px;">
+                        Upload Images: &nbsp;
+                        <p-fileUpload name="demo[]" id="inputfields" type="image" customUpload="true"
+                          (uploadHandler)="onUpload($event)" multiple="multiple" showCancelButton accept="image/*"
+                          maxFileSize="50000000" required>
+                        </p-fileUpload>
+                      </div>
+                    </form>
+  
+                  </div>
+                </div>
+              </div>
+  
+  
+              <!-- <div class="row" *ngFor="let displayimag of displayimages" id="" style="margin-left:20px;">
+                <div class="col-lg-3">
+                  <span id="imgdel">
+                    <a (click)="onDelete(displayimag.source)" class="fa fa-trash"> </a>
+                  </span>
+                  <span id="img">
+                    <img class="card-img-responsive-top zoom" [src]="displayimag.source" alt="user image" height="150px"
+                      width="200px" id="img" required />
+                  </span>
+                </div>
+              </div> -->
+              <div class="row" *ngFor="let displayimag of displayimages" id="" style="margin-left:20px;">
+                  <div class="col-lg-3">
+                    <span id="imgdel" *ngIf='imagesdisplay==false'>
+                      <a (click)="onDelete(displayimag.source)" class="fa fa-trash"> </a>
+                    </span>
+                    <span id="img">
+                      <img class="card-img-responsive-top zoom" [src]="displayimag.source" alt="user image" height="150px"
+                        width="200px" id="img" required />
+                    </span>
+                  </div>
+                </div>
+      
+           
+           
+            </div>
+          </div>
+          <div class="row" style="margin:0px;" id="facilitiesmain">
+            <div class="facilities-bar">
+              <h5>Facilities:</h5>
+            </div>
+  
+            <div class="col-md-3" id="facility1" *ngFor="let facilities of facilitiesArray"
+              style="padding:0px; margin-left:30px; ">
+              <div class="row">
+                <div id="check">
+                  <input type="checkbox" (click)="checkBox(facilities.fid)" checked></div>
+                <img [src]="facilities.fimg" width="25px" height="25px" />
+                <span id="facname">{{facilities.fname | titlecase}}</span>
+              </div>
+  
+            </div>
+            <div class="col-md-3" id="facility1" *ngFor="let prop of facilitiesGet3"
+              style="padding:0px; margin-left:30px;">
+              <div class="row">
+                <div id="check">
+                  <input type="checkbox" (click)="checkBox(prop.fid)"></div>
+                <img [src]="prop.fimg" width="25px" height="25px" />
+                <span id="facname"> {{prop.fname | titlecase}}</span>
+              </div>
+            </div>
+            <div class="row" style="margin:0px;">
+              <div class="facilities-bar" style="margin-bottom:15px;">
+                <h5>Amenities:</h5>
+              </div>
+  
+              <div class="row" id="aminitiesmain" id="aminitiesmain">
+                <div id="amenities" style=" float:left" *ngFor="let amenities of amenar">
+                  <small> {{amenities.amenname}}</small>
+                  <div>
+                    <input type="text" pInputText pKeyFilter="pint" #va1 (change)="amenity(amenities.amenid,va1.value)"
+                      [(ngModel)]="amenities.amenvalue">
+                  </div>
+                </div>
+                <div id="amenities" style="float:left" *ngFor="let amenities of amenitiesUserNotSelected">
+                  <small> {{amenities.propertyamenity}} </small>
+                  <div>
+                    <input type="text" pInputText pKeyFilter="pint" #va1 (change)="amenity(amenities.amid,va1.value)">
+                  </div>
+                </div>
+  
+              </div>
+  
+  
+              <p class="d-inline mx-auto center">
+                <span> <button class="btn btn-info" (click)="updatePropertyDetails()" style="margin-right: 30px;">Update
+                    Info</button></span>
+              </p>
+            </div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

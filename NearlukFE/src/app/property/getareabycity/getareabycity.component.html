@@ -1,0 +1,27 @@
+
+<div class="container" id="maincard" style="margin-top: 10%">
+  <div class=" offset-md-2 col-md-8">
+    <div class="card" class="card" *ngFor="let nls of propertyList" id="cards">
+      <div class="row">
+        <div class="col-md-3" id="cntnt-left">
+          <img class="img-responsive zoom" id="img" [src]="nls.img" alt="card image" height="150px" width="130px"
+            (click)="imagescomponent(nls.images)" />
+        </div>
+        <div class="col-md-4 pointer" (click)="MoreDetails(nls.property_id)" id="properties">
+          <div class="pointer">
+            <br> Property Name : {{nls.property_name | titlecase}}
+            <br> Property Type : {{nls.property_type}}
+            <br> Price : {{nls.price}}
+          </div>
+          <div *ngIf="nls.distance!=null">
+            <b>Distance : {{nls.distance | number}}</b>&nbsp; Miles
+          </div>
+        </div>
+        <div class="col-md-1" id="stamp" *ngIf="nls.nearluk_verified==='V'">
+          <img src="./assets/images/stamp.png" alt="user image" height="60px" width="60px" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

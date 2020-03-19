@@ -1,0 +1,188 @@
+<div class="bgimg">
+
+
+  <div class="wrapper fadeInDown">
+
+    <div class="col-lg-4 col-md-12 mx-auto">
+      <div class="card">
+        <div class="card-header" style="color:rgb(21, 171, 182);">
+          Register Here
+          <i class="fa fa-fw fa-remove fa-1x" style="float:right" (click)="cncl()" data-toggle="tooltip"
+            data-placement="top" title="Remove "></i>
+
+        </div>
+        <form #myFrm="ngForm" class="form-signin" name="form" (ngSubmit)="myFrm.form.valid" novalidate>
+
+          <div class="card-body login-bg">
+            <div class="form-wrapper">
+              <p style="text-align:center;">
+                <img src="../assets/images/nearlukpng.png" width="65px" class="img-fluid">
+              </p>
+
+              <div class="row" style="margin:0px;">
+
+                <div class="formtype" [class.has-error]="roleid.invalid && roleid.touched">
+
+                  <b>I am : </b>&nbsp;
+                  <label class="radio-inline">
+                    <input type="radio" name="roleid" required #roleid="ngModel" [(ngModel)]="register.roleid" value="1"
+                      #roleidControl="ngModel" />Owner/Tenant
+                  </label>
+                  &nbsp;&nbsp;
+                  <label class="radio-inline">
+                    <input type="radio" name="roleid" required #roleid="ngModel" [(ngModel)]="register.roleid"
+                      value="2" />Agent
+                  </label>
+
+                </div>
+              </div>
+              <div class="form-gap"></div>
+
+
+
+              <div class="row" style="margin:0px;">
+
+                <input type="text" #name="ngModel" minlength="3" maxlength="50" [(ngModel)]="register.name" name="name"
+                  autocomplete="off" placeholder="Name" class="form-control" required
+                  pattern="[^ ~!#$%&*()^][ A-Za-z.]*" [ngClass]="{'is-invalid':myFrm.submitted && name.invalid}"
+                  required />
+                <span class="text-danger" *ngIf="name.errors && (name.touched ||name.dirty)">
+                  <span [hidden]="!name.errors?.required">Please enter the name
+                  </span>
+                  <span data-toggle="popover" [hidden]="!name.errors?.minlength">This field should be within 3 - 50
+                    chars range.
+                  </span>
+                  <br>
+                  <span [hidden]="!name.errors?.pattern">This field will accept alphabets only</span>
+                </span>
+                <div class="invalid-feedback" *ngIf="!(name.errors && (name.touched || name.dirty))">
+                  <div>Please enter the name</div>
+                </div>
+
+              </div>
+
+              <div class="form-gap"></div>
+
+              <div class="row" style="margin:0px;">
+
+                <input type="text" #Id="ngModel" maxlength="100" (input)="makeUserFalse()" [(ngModel)]="register.email"
+                  placeholder="Email" autocomplete="off" name="email" class="form-control" required
+                  pattern="[a-zA-Z0-9!#$%&.'*+-/=?^_`{|}~]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                  [ngClass]="{'is-invalid':myFrm.submitted && Id.invalid}" required />
+                <span *ngIf="userExist==true">Email already exists</span>
+                <span class="text-danger" *ngIf="Id.errors && (Id.touched || Id.dirty)">
+                  <span [hidden]="!Id.errors?.required">Please enter the email Id</span>
+                  <span [hidden]="!Id.errors.pattern">Please enter valid email Id</span>
+                </span>
+                <div class="invalid-feedback" *ngIf="!(Id.errors && (Id.touched || Id.dirty))">
+                  <div>Please enter the email Id </div>
+                </div>
+              </div>
+
+              <div class="form-gap"></div>
+
+              <div class="row" style="margin:0px;">
+                <input type="password" #password="ngModel" [(ngModel)]="register.Password" placeholder="Password"
+                  minlength="6" maxlength="30" autocomplete="off" name="password" class="form-control"
+                  [ngClass]="{'is-invalid':myFrm.submitted && password.invalid}" required pattern="[^ ~!#/^]*"
+                  required />
+                <span class="text-danger" *ngIf="password.errors && (password.touched || password.dirty)">
+                  <span data-toggle="popover" [hidden]="!password.errors.required">Please enter the password</span>
+                  <span data-toggle="popover" [hidden]="!password.errors.minlength">This field should be within 6 - 30
+                    chars range
+                  </span>
+
+                  <br />
+                </span>
+                <div class="invalid-feedback" *ngIf="!(password.errors && (password.touched || password.dirty))">
+                  <div>Please enter the password</div>
+                </div>
+              </div>
+
+              <div class="form-gap"></div>
+
+              <div class="row" style="margin:0px;">
+                <input class="form-control" type="password" #pwConfirm="ngModel" name="Confirm password"
+                  placeholder="Re-enter password" [ngClass]="{'is-invalid':myFrm.submitted && pwConfirm.invalid}"
+                  ngModel required compare="password" />
+                <div class="text-danger" *ngIf="pwConfirm.invalid && (pwConfirm.dirty||pwConfirm.touched)">
+                  <span *ngIf="pwConfirm.errors['required']">Please confirm the password</span>
+                </div>
+                <span *ngIf='pwConfirm.value!=register.Password && pwConfirm.value !=0 && register.Password !=null'>
+                  Password mismatch, Try again
+                </span>
+                <div class="invalid-feedback" *ngIf="!(pwConfirm.errors && (pwConfirm.touched || pwConfirm.dirty))">
+                  <div>Please confirm the password</div>
+                </div>
+              </div>
+
+
+
+              <div class="form-gap"></div>
+
+
+              <div class="row" *ngIf="!displayOtp">
+                <div class="col-md-4">
+                  <input type="text" #isd="ngModel" autocomplete="off" placeholder="ISD" [(ngModel)]="register.isd_code"
+                    name="name1" class="form-control" disabled>
+                </div>
+                <div class="col-md-8">
+                  <div id="mobile">
+                    <input type="text" pInputText pKeyFilter="pint" (input)="makeMobileFalse()" minlength="10" maxlength="15"
+                      class="form-control" placeholder="Mobile Number" #mobile="ngModel" [(ngModel)]="register.mobile"
+                      name="mobile" autocomplete="off" pattern="[0-9]*"
+                      [ngClass]="{'is-invalid':myFrm.submitted && mobile.invalid}" required />
+                    <span *ngIf="mobileExist==true">mobile already exist</span>
+                    <span *ngIf="mobile.errors && (mobile.touched || mobile.dirty)">
+                      <span class="text-danger" data-toggle="popover" [hidden]="!mobile.errors.required">mobile required
+                      </span>
+                      <span class="text-danger" data-toggle="popover" [hidden]="!mobile.errors.pattern">mobile number
+                        required</span>
+                    </span>
+                    <div class="invalid-feedback" *ngIf="!(mobile.errors && (mobile.touched || mobile.dirty))">
+
+                      <div class="text-danger">please mention mobile number</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div *ngIf="displayOtp">
+                <input type="text" maxlength="6" pInputText pKeyFilter="pint" autocomplete="off" #otp
+                  class="form-control" id="Max" placeholder="Enter OTP sent to {{register.mobile}}" required>
+                <br>
+
+                <div id="otpButton">
+                  <button [disabled]="otp.invalid" class="btn btnverify" (click)="verifyOtp(otp,pwConfirm)">
+                    verify</button>
+                </div>
+
+                <div *ngIf='timeer==false'>
+                  Resend OTP: <i class="far fa-clock" style="margin-top:10%; margin-bottom: 10%;">
+                    {{timeLeft}}sec </i>
+                </div>
+
+                <div *ngIf='resendotpbutton==true'>
+                  <button id="resend" class="btn btn-success" (click)="resentOtp(register.mobile)">Resend OTP</button>
+                </div>
+              </div>
+
+
+              <div class="form-gap"></div>
+              <div class="form-gap"></div>
+
+
+              <div class="row" *ngIf="!displayOtp">
+                <button class="btn btnsubmit" type="submit" (click)="signUpClick(register.mobile,pwConfirm)"
+                  [disabled]="!myFrm.form.valid">Submit</button>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

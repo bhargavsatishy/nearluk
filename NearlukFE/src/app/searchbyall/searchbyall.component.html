@@ -1,0 +1,64 @@
+<section style="margin-top: 10%">
+  <div class="container py-3" id="myprprtycard" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"
+    [scrollWindow]="false" style="height: 900px; overflow-y: scroll;">
+    <div class="card" *ngFor="let nls of propertydetails" id="mycard">
+      <div class="row ">
+        <div class="col-lg-4 col-md-12">
+          <div id="pimg">
+            <img [src]=nls.img alt="user image" width="90%" height="200px" />
+
+
+          </div>
+
+        </div>
+        <div class=" col-lg-8 col-md-12">
+          <div class="card-block">
+            <div class="row">
+              <h5 id="username" title={{nls.propertyname|titlecase}} (click)="moredetails(nls.id)">
+                {{(nls.propertyname)| titlecase}}
+              </h5>
+            </div>
+            <hr>
+            <div class="row">
+              <h6>Type :</h6>
+              <span> {{((nls.propertytype?.length>10)?(nls.propertytype|slice:0:10)+'...':(nls.propertytype))}}</span>
+            </div>
+            <hr>
+            <div class="row">
+              <p id="rent">
+                <small id="headdingtext">Rent :</small> {{nls.country_currency_symbol}} {{nls.price}}/{{nls.rentalperiod}}
+              </p>
+              <P id="rent">
+                <small id="headdingtext">Area :</small>
+                {{((nls.areaname?.length>20)?(nls.areaname|slice:0:10):(nls.areaname))}}
+
+              </P>
+              <p id="rent">
+                <small id="headdingtext">Posted on :</small> {{nls.posteddate | date }}
+
+              </p>
+            </div>
+            <div class="row">
+              <!-- <div *ngIf="nls.userid!=userid">
+                <div id="bidding">
+                  <button class="btn btn-info" (click)="getBidding(nls.id,nls.price,nls.userid)">Bidding</button>
+                </div>
+              </div> -->
+              <div id="moredetails">
+                <button class="btn btn-info" (click)="moredetails(nls.id)">More Details</button>
+
+              </div>
+
+
+              <!-- <div id="avgrate">
+                <small> Rating:</small>{{nls.trunc}}
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>

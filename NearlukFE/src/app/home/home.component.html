@@ -1,0 +1,423 @@
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" id="imagescarousel">
+    <div id="search-homes">
+      <div class="container">
+        <div class="row">
+          <div class="search-bar-1">
+            <div class="property-bar">
+              <div class="p-type">
+                <div class="">
+                  <div class="area">
+                    <div class="form-group">
+                      <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace"
+                        [(ngModel)]="filterObj.propertytype" #property (click)="clickproperty(property)"
+                        [suggestions]="propertyresults1" placeholder="Enter Property Type " [autoHighlight]="true"
+                        (completeMethod)="searchProperty($event)" id="autocompletesearch"
+                        (click)="searchProperty($event)" [style]="{'height':'40px'}" [inputStyle]="{'height':'40px'}">
+                      </p-autoComplete>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="location-bar">
+              <div class="area">
+                <div class="form-group">
+                  <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace"
+                  [(ngModel)]="filterObj.cityName" #city (click)='clickCity(city)' [suggestions]="results"
+                  placeholder="Enter Your Location" (completeMethod)="searchCity($event)" id="autocompletesearch"
+                  [style]="{'height':'40px'}" [inputStyle]="{'height':'40px'}">
+                </p-autoComplete>
+                </div>
+              </div>
+            </div>
+            <div class="search-btn-bar">
+              <button type="button" class="btn btn-info btn-search" href="#router" [disabled]="city.invalid"
+                (click)="search(verifyy,rat)" id="searchbtn" data-dismiss="modal">Search &nbsp;
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row " id="advancebutton"
+        style="margin:0px;float:right;background:transparent;color: white;font-size: 14px;">
+        <button class="advance-text" type="button" data-toggle="modal" data-target="#myModal">Advance Search!
+        </button>
+      </div>
+    </div>
+    <div class="carousel-item active">
+      <img src="../../assets/image7.jpg" alt="Los Angeles" class="img-fluid"> </div>
+  </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content ad-popup">
+      <div class="modal-header">
+        <h4 class="modal-title">Advanced Search </h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="p-type">
+                <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace"
+                  [(ngModel)]="filterObj.propertytype" #Advsearchproperty (click)="clickproperty(Advsearchproperty)"
+                  [suggestions]="propertyresults1" size="42" placeholder="Enter any property" [autoHighlight]="true"
+                  (completeMethod)="searchProperty($event)" id="autocompletesearch" (click)="searchProperty($event)">
+                </p-autoComplete>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="area">
+                <div class="form-group">
+                  <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace"
+                    [(ngModel)]="filterObj.cityName" #city (click)='clickCity(city)' [suggestions]="results" size="42"
+                    placeholder="Enter Your Location" (completeMethod)="searchCity($event)" id="autocompletesearch">
+                  </p-autoComplete>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="verifyblock">
+                <p-dropdown [options]="verification" placeholder="Nearluk Verified" [(ngModel)]="filterObj.veification"
+                  #verifyy [style]="{'width':'100%','height':'40px'}">
+                </p-dropdown>
+              </div>
+            </div>
+            <div class="col-sm-6" id="ratingblock">
+              <div class="ratingblock">
+                <p-dropdown [options]="rating" [(ngModel)]="filterObj.rating" placeholder="Rating" #rat
+                  [style]="{'width':'100%','height':'40px'}"></p-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row">
+            <div class="col-sm-6">
+              <input type="text" #min pInputText pKeyFilter="pint" [(ngModel)]="filterObj.minprice" class="form-control"
+                placeholder="Min Price" id="minprice" style="width:100%;" />
+            </div>
+            <div class="col-sm-6" id="maxp">
+              <input type="text" #max pInputText pKeyFilter="pint" [(ngModel)]="filterObj.maxprice" class="form-control"
+                placeholder="Max Price" id="maxprice" style="width:100%;" />
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row">
+            <div class="col-sm-6">
+              <p-multiSelect [options]="facing" [(ngModel)]="filterObj.facing" defaultLabel="Facing" class="form-select"
+                [style]="{'width':'100%','height':'40px'}">
+              </p-multiSelect>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" href="#router" (click)="search(verifyy,rat)" id="searchicon"
+          data-dismiss="modal">Search</button>
+        <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="findprty">
+  <b>Find Rental Properties in these Cities</b>
+</h2>
+<div class="container">
+  <div class="row blog">
+    <div class="col-md-12">
+      <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#blogCarousel" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <section class="propertes_section pt_90 pb_70">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let count of citycnt">
+                    <div class="single_propertes radius_5 pos_relative">
+                      <img src="http://localhost:3400/{{count.cityname}}.jpg" (click)="getProperies(count.cityid)"
+                        class="img-fluid radius_5 transition_5s" alt="propertes">
+                      <a (click)="getProperies(count.cityid)">
+                        <div class="img_hoverlay transition_3s radius_5 text-center">
+                          <h4 class="fw_500">{{count.cityname}}</h4>
+                          <p class="color_ff">{{count.count}} Properties</p>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="carousel-item">
+            <section class="propertes_section pt_90 pb_70">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let count of citycnt1">
+                    <div class="single_propertes radius_5 pos_relative">
+                      <img src="http://localhost:3400/{{count.cityname}}.jpg" (click)="getProperies(count.cityid)"
+                        class="img-fluid radius_5 transition_5s" alt="propertes">
+                      <a (click)="getProperies(count.cityid)">
+                        <div class="img_hoverlay transition_3s radius_5 text-center">
+                          <h4 class="fw_500">{{count.cityname}}</h4>
+                          <p class="color_ff">{{count.count}} Properties</p>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+
+        <!-- <a class="carousel-control-prev">
+          <span class="carousel-control-prev-icon" id="hiiiii" aria-hidden="true" data-target="#blogCarousel"
+            data-slide-to="0"></span>
+
+        </a>
+        <a class="carousel-control-next">
+          <span class="carousel-control-next-icon" id="hiiiii" aria-hidden="true" data-target="#blogCarousel"
+            data-slide-to="1"></span>
+
+        </a> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+</div>
+
+
+<h2 style="color:#17a2b8;margin-bottom:10px">Featured Properties
+</h2>
+<div class="container">
+  <div class="row blog">
+    <div class="col-md-12">
+      <div id="blogCarousel1" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#blogCarousel1" data-slide-to="0" class="active"></li>
+          <li data-target="#blogCarousel1" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <section class="propertes_section pt_90 pb_70">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let count of GetFeturedProperties">
+                    <div class="single_propertes radius_5 pos_relative">
+                      <img src="http://localhost:3400/{{count.preference}}.jpg" (click)="getFeatured(count.preference)"
+                        class="img-fluid radius_5 transition_5s" id="preference" alt="propertes">
+                      <a (click)="getFeatured(count.preference)">
+                        <div class="img_hoverlay transition_3s radius_5 text-center" id="preference">
+                          <h4 class="fw_500">{{count.preference}}</h4>
+                          <p class="color_ff">{{count.count}} Properties</p>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="carousel-item">
+            <section class="propertes_section pt_90 pb_70">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let count of GetFeturedProperties1">
+                    <div class="single_propertes radius_5 pos_relative">
+                      <img src="http://localhost:3400/{{count.preference}}.jpg" (click)="getFeatured(count.preference)"
+                        class="img-fluid radius_5 transition_5s" alt="propertes">
+                      <a (click)="getFeatured(count.preference)">
+                        <div class="img_hoverlay transition_3s radius_5 text-center">
+                          <h4 class="fw_500">{{count.preference}}</h4>
+                          <p class="color_ff">{{count.count}} Properties</p>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div *ngFor="let nls of optionPropertyType">
+    <h4 style="color:#17a2b8">
+      <b>
+        <a (click)='Viewproperty(nls.type)' id="navtabs">{{nls.type | uppercase}}</a>
+      </b>
+    </h4>
+    <div class="row">
+      <div class="col-md-12 col-lg-4" *ngFor="let nls1 of nls.pdata">
+
+        <div class="contain-img">
+
+          <div class="card zoom" (click)="moredetails(nls1.id)" id="homecard">
+            <div *ngFor="let imgs of images">
+              <div *ngIf='nls1.id==imgs.id'>
+
+                <!-- <div class="container2">
+                  <img src="{{imgs.img}}" alt="user image" width="100%" height="200px" />
+                  <div class="content1">
+                    <div class="vertical-center">
+                      <h6>NearLuk</h6>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="img_hoverlayview transition_3s radius_5 text-center">
+                    <div class="tooltip2" *ngFor="let recent of recentviewedpropertys">
+                      <i class="fa fa-eye" style="color:#17a2b8" aria-hidden="true" *ngIf="nls1.id==recent.propertyid">
+                        <span class="tooltiptext1">
+                          Viewed
+                        </span>
+                      </i>
+
+                    </div>
+
+                  </div>
+
+
+                  
+                </div> -->
+                <div class="container2">
+                  <img src="{{imgs.img}}" alt="user image" width="100%" height="200px" />
+                  <div class="content1">
+                    <div class="vertical-center">
+                      <h6>NearLuk</h6>
+
+                    </div>
+
+                  </div>
+                  <div class="img_hoverlayview transition_3s radius_5 text-center">
+                    <div class="tooltip2">
+                      <i class="fa fa-eye" style="color:#17a2b8" aria-hidden="true" *ngIf="nls1.userviewd!=null">
+                        <span class="tooltiptext1">
+                          Viewed
+                        </span>
+                      </i>
+                    </div>
+                    <div class="tooltip3">
+                      <i class="fa fa-phone" style="color:#17a2b8;margin-left: 100px" aria-hidden="true"
+                        *ngIf="nls1.contactviewed!=null">
+                        <span class="tooltiptext3" style="margin-left: -120px">
+                          ContactViewed
+                        </span>
+                      </i>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h5 id="username" title={{nls1.propertyname|titlecase}} (click)="moredetails(nls1.id)">
+                    {{((nls1.propertyname?.length>10)?(nls1.propertyname|slice:0:15)+'...':(nls1.propertyname)) | titlecase}}
+                  </h5>
+                  <p>
+                    <i class="fa fa-map-marker"></i> {{nls1.areaname|slice:0:10}}, {{nls1.cityname|slice:0:10}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row" style="margin-bottom: 5px;">
+                <div id="faci" *ngFor="let AF of nls1.facilitiesamenities.fadata">
+                  <div *ngIf='AF.facilities[0]!=null'>
+                    <img src="http://localhost:3400/{{AF.facilities[0]}}.png" width="15px" height="20px" />
+                    {{((AF.facilities[0]?.length>10)?(AF.facilities[0]|slice:0:10)+'...':(AF.facilities[0])) | titlecase}}
+                  </div>
+                  <div *ngIf='AF.facilities[0]==null'>
+                    <br>
+                  </div>
+                  <div *ngIf='AF.facilities[1]!=null'>
+                    <img src="http://localhost:3400/{{AF.facilities[1]}}.png" width="15px" height="20px" />
+                    {{((AF.facilities[1]?.length>10)?(AF.facilities[1]|slice:0:10)+'...':(AF.facilities[1])) | titlecase}}
+                  </div>
+                  <div *ngIf='AF.facilities[1]==null'>
+                    <br>
+                  </div>
+                </div>
+                <div id="ame" *ngFor="let AF of nls1.facilitiesamenities.fadata">
+                  <div *ngIf='AF.amenities[0]!=null'>
+                    <img src="http://localhost:3400/{{AF.amenities[0]}}.png" width="15px" height="20px" />
+                    {{((AF.amenities[0]?.length>10)?(AF.amenities[0]|slice:0:10)+'...':(AF.amenities[0])) | titlecase}}
+                    : {{AF.amenities_value[0]}}
+                  </div>
+                  <div *ngIf='AF.amenities[0]==null'>
+                    <br> </div>
+                  <div *ngIf='AF.amenities[1]!=null'>
+                    <img src="http://localhost:3400/{{AF.amenities[1]}}.png" width="15px" height="20px" />
+                    {{((AF.amenities[1]?.length>10)?(AF.amenities[1]|slice:0:10)+'...':(AF.amenities[1])) | titlecase}}
+                    : {{AF.amenities_value[1]}}
+                  </div>
+                  <div *ngIf='AF.amenities[1]==null'>
+                    <br> </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row" *ngIf='userid!=null'>
+                <div class="col-md-6">
+
+                  <div class="tooltip1">
+                    <i class="fa fa-user">&nbsp; {{nls1.name|slice:0:8}} </i>
+
+                    <span class="tooltiptext">
+                      <tr>Name : {{nls1.name}}
+                      </tr>
+                      <tr>
+                        Occupation : {{nls1.occupation}}
+                      </tr>
+                      <tr>
+                        City Name : {{nls1.ownercity}}
+                      </tr>
+                    </span>
+
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <i class="fa fa-clock-o"></i> {{nls1.posteddate | date}}</p>
+                </div>
+              </div>
+              <div class="row" *ngIf='userid==null'>
+                <div class="col-md-6">
+                  <p>
+                    <i class="fa fa-user"></i> {{nls1.name|slice:0:8}} </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <i class="fa fa-clock-o"></i> {{nls1.posteddate | date}}</p>
+                </div>
+              </div>
+              <h6 id="ph6"> {{nls1.price | currency: '₹' :false:'1.0'}}/{{nls1.rentalperiod}} </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <i class="fa fa-arrow-right" aria-hidden="true" (click)='Viewproperty(nls.type)'
+      style="float:right;color:#17a2b8;font-size: large; padding-right: 5%" id='hand'>ViewAll</i>
+  </div>
+</div>
+
+
+<app-footer-main></app-footer-main>

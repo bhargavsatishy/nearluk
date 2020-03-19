@@ -1,0 +1,165 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="form-group row">
+    <div class="col-lg-2">
+      <select #sortbyadmin required class="form-control" id="sortbyadmin">
+        <option disabled>AdminSorting</option>
+        <option value="V">verified</option>
+        <option value="N">Notverified</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Active">Active</option>
+      </select>
+    </div>
+    <div class="col-lg-2">
+      <select class="form-control" name="countryname" #countryname="ngModel" [(ngModel)]="adminsearch.countryname"
+        (change)="optionstate(countryname.value)" required>
+        <option [ngValue]="undefined" hidden selected>Select Country</option>
+        <option class='option' *ngFor='let option of options' [value]="option.id">{{option.countryname}}</option>
+      </select>
+    </div>
+    <div class="col-lg-2">
+      <select class="form-control" name="statename" #statename="ngModel" [(ngModel)]="adminsearch.statename"
+        (change)="optioncity(statename.value)" required>
+        <option [ngValue]="undefined" hidden selected>Select State</option>
+        <option class='option' *ngFor='let option1 of optionsstate' [value]="option1.id">{{option1.statename}}
+        </option>
+      </select>
+    </div>
+    <div class="col-lg-2">
+      <select class="form-control" name="cityname" #cityname="ngModel" [(ngModel)]="adminsearch.cityname"
+        (change)="optionarea(cityname.value)" required>
+        <option [ngValue]="undefined" hidden selected>Select City</option>
+        <option class='option' *ngFor='let option2 of optionscity' [value]="option2.id">{{option2.cityname}}
+        </option>
+
+      </select>
+    </div>
+    <div class="col-lg-2">
+      <select class="form-control" name="areaname" #areaname="ngModel" [(ngModel)]="adminsearch.areaname">
+        <option [ngValue]="undefined" hidden selected>Select Area</option>
+        <option class='option' *ngFor='let option2 of optionsarea' [value]="option2.id">{{option2.areaname}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-10 mx-auto">
+    <button class="btn btn-info " type="button" (click)="btnadminsearch(sortbyadmin.value)">submit</button>
+    <button class="btn btn-warning " type="button" (click)="adminviewallproperties()">ViewAll</button>
+  </div>
+</div>
+
+<div *ngIf="propertyList =='NDF'">
+  <img src="../../../assets/images/no properties.png" class="img-fluid" alt="No properties.."
+    style="width:100%;height:350px">
+</div>
+
+<!-- <div *ngIf="viewall != true || propertyList!='NDF'" class="loading" infiniteScroll [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"
+  style="height: 900px; overflow-y: scroll;">
+  <table class="table table-striped">
+    <tr>
+      <th>Property ID</th>
+      <th>Property name</th>
+      <th>city </th>
+      <th>country </th>
+      <th>mobile</th>
+      <th>Verified</th>
+      <th>Status</th>
+    </tr>
+    <tr *ngFor="let nls of propertyList">
+      <td>
+        {{nls.id}}
+      </td>
+      <td>
+        {{nls.propertyname}}
+      </td>
+      <td>
+        {{nls.cityname}}
+      </td>
+      <td>
+        {{nls.countryname}}
+      </td>
+      <td *ngIf='nls.mobile==null'>
+        NA
+      </td>
+      <td *ngIf='nls.mobile!=null'>
+        {{nls.mobile}}
+      </td>
+
+      <td>
+        <p-inputSwitch [ngModel]="myProp === nls.nearlukverified" (ngModelChange)="handleChange($event,nls.id)"
+          (onChange)="myProp = $event ? 'V' : 'N'"></p-inputSwitch>
+
+      </td>
+      <td>
+        <p-inputSwitch [ngModel]="myProp1 === nls.status" (ngModelChange)="handleChangee($event,nls.id)"
+          (onChange)="myProp1 = $event ? 'Active' : 'Inactive'"></p-inputSwitch>
+      </td>
+    </tr>
+  </table>
+</div> -->
+
+
+
+<div class="container">
+  <div class="row" class="loading" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()" [scrollWindow]="false" style="height: 600px; overflow-y: scroll;">
+    <div class="col-md-12" *ngIf="viewall != true || propertyList!='NDF'">
+
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+            <th>Property ID</th>
+            <th>Property name</th>
+            <th>city </th>
+            <th>country </th>
+            <th>mobile</th>
+            <th>Verified</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let nls of propertyList">
+          <tr>
+            <td>
+              {{nls.id}}
+            </td>
+            <td>
+              {{nls.propertyname}}
+            </td>
+            <td>
+              {{nls.cityname}}
+            </td>
+            <td>
+              {{nls.countryname}}
+            </td>
+            <td *ngIf='nls.mobile==null'>
+              NA
+            </td>
+            <td *ngIf='nls.mobile!=null'>
+              {{nls.mobile}}
+            </td>
+
+            <td>
+              <p-inputSwitch [ngModel]="myProp === nls.nearlukverified" (ngModelChange)="handleChange($event,nls.id)"
+                (onChange)="myProp = $event ? 'V' : 'N'"></p-inputSwitch>
+
+            </td>
+            <td>
+              <p-inputSwitch [ngModel]="myProp1 === nls.status" (ngModelChange)="handleChangee($event,nls.id)"
+                (onChange)="myProp1 = $event ? 'Active' : 'Inactive'"></p-inputSwitch>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</div>

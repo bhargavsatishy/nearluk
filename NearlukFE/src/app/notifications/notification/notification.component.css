@@ -1,0 +1,22 @@
+.body {
+  background: #eee;
+  color: #222;
+  font-family: Helvetica, Verdana, sans-serif;
+  margin: -30px;
+  min-height: 100%;
+  width: 100%;
+  padding: 10px 23%;
+}
+
+#AgentName {
+  padding-top: 10%;
+  color: #17a2b8;
+}
+
+.h6 {
+  padding-left: 30%;
+}
+
+.container {
+  border-style: solid;
+}

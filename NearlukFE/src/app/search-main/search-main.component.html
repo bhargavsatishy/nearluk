@@ -1,0 +1,108 @@
+<div id="search-homes" *ngIf="show==false">
+  <div class="container">
+    <div class="row" style="padding-top: 6px;">
+
+
+      <div class="search-bar-1">
+        <div class="property-bar">
+          <div class="p-typee">
+            <div class="">
+              <div class="area">
+                <div class="form-group">
+                  <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace"
+                    [(ngModel)]="filterObj.propertytype" #property (click)="clickproperty(property)"
+                    [suggestions]="propertyresults1" placeholder="Enter Property Type " [autoHighlight]="true"
+                    (completeMethod)="searchProperty($event)" id="autocompletesearch" (click)="searchProperty($event)"
+                    [style]="{'height':'40px'}" [inputStyle]="{'height':'40px'}">
+                  </p-autoComplete>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="location-bar">
+          <div class="area">
+            <div class="form-group">
+              <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace" [(ngModel)]="filterObj.cityName"
+                #city (click)='clickCity(city)' [suggestions]="results" placeholder="Enter Your Location"
+                (completeMethod)="searchCity($event)" id="autocompletesearch" [style]="{'height':'40px'}"
+                [inputStyle]="{'height':'40px'}">
+              </p-autoComplete>
+            </div>
+          </div>
+        </div>
+        <div class="search-btn-bar">
+          <button type="button" class="btn btn-info btn-search" href="#router" [disabled]="city.invalid"
+            (click)="search1()" id="searchbtn" data-dismiss="modal">Search
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+
+          <button class="btn  btn-info btn-search" type="button" (click)="advance()">Advance
+            <i class="fa fa-filter" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="container" id="subcontainer" *ngIf="show==true">
+
+  <i class="fa fa-times" aria-hidden="true" (click)="closeButton()" id="closeButton"></i>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="p-type">
+        <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace" [(ngModel)]="filterObj.propertytype"
+          #Advsearchproperty (click)="clickproperty(Advsearchproperty)" [suggestions]="propertyresults1" size="42"
+          placeholder="Enter any property" [autoHighlight]="true" (completeMethod)="searchProperty($event)"
+          id="autocompletesearch" (click)="searchProperty($event)">
+        </p-autoComplete>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="area">
+        <div class="form-group">
+          <p-autoComplete input type="text" pInputText [pKeyFilter]="blockspace" [(ngModel)]="filterObj.cityName" #city
+            (click)='clickCity(city)' [suggestions]="results" size="42" placeholder="Enter Your Location"
+            (completeMethod)="searchCity($event)" id="autocompletesearch">
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="verifyblock">
+        <p-dropdown [options]="verification" placeholder="Nearluk Verified" [(ngModel)]="filterObj.veification" #verifyy
+          [style]="{'width':'100%', 'height':'30px'}">
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="col-md-3" id="ratingblock">
+      <div class="ratingblock">
+        <p-dropdown [options]="rating" [(ngModel)]="filterObj.rating" placeholder="Rating" #rat
+          [style]="{'width':'100%', 'height':'30px'}"></p-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <input type="text" #min pInputText pKeyFilter="pint" [(ngModel)]="filterObj.minprice" class="form-control"
+        placeholder="Min Price" id="minprice" style="width:100%;" />
+    </div>
+    <div class="col-md-3">
+      <input type="text" #max pInputText pKeyFilter="pint" [(ngModel)]="filterObj.maxprice" class="form-control"
+        placeholder="Max Price" id="maxprice" style="width:100%;" />
+    </div>
+    <div class="col-md-3">
+      <p-multiSelect [options]="facing" [(ngModel)]="filterObj.facing" defaultLabel="Facing" class="form-select"
+        [style]="{'width':'100%', 'height':'30px'}">
+      </p-multiSelect>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-info" href="#router" (click)="search(verifyy,rat)" id="searchicon"
+        data-dismiss="modal">Search</button>
+    </div>
+  </div>
+
+</div>

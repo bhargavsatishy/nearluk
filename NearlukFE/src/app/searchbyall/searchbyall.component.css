@@ -1,0 +1,86 @@
+/* #homecard{
+    border-radius: 10px;
+    margin-top: 15px;
+   }
+   #username {
+    color: rgb(99, 197, 197);
+    cursor: pointer;
+    text-align: center;
+    }
+    #ph6{
+        background: #17a2b8;
+        text-align: center;
+        margin: 2px -20px -20px -20px;
+        border-radius: 0 0 8px 8px;
+        padding: 10px;
+        color: white;
+      } */
+
+
+
+
+      /* ====================== */
+
+      #maincard{
+        margin-top: 15px;
+      }
+      #fvrts{
+      padding-bottom: 25px; 
+      margin-top: 90px;
+      
+      }
+      .zoom:hover {
+      transform: scale(1.02);
+      border-style: solid ;
+      border-color: #65bebe;
+      transition: transform 0.8s;
+      }
+      
+      #username {
+      color: rgb(99, 197, 197);
+      cursor: pointer;
+      }
+      
+      ::-webkit-scrollbar { 
+      display: none; 
+      }
+      #morebutton{
+      margin-left: 20px;
+      }
+      #addupdate{
+        padding-left: 45px;
+      }
+      .addagent{
+        padding-left: 50px;
+      }
+      #status{
+        padding-top: 10px;
+      }
+      #switch{
+        padding-left:25px;
+      }
+      
+      
+      #myprprtycard{
+        margin-top: 100px;
+      }
+      
+      #mycard{
+        margin-top:20px;
+      }
+      
+      #username{
+        padding-top:10px;
+      }
+      
+      #cmprbtn{
+        padding-left:20px;
+      }
+      #avgrate{
+        padding-left:40px;
+      }
+      
+      #rent{
+        padding-left:15px;
+        padding-right:15px;
+      }
