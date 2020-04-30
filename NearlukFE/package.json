@@ -37,7 +37,7 @@
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "ng2-image-compress": "^7.0.7",
     "ngx-google-places-autocomplete": "^2.0.3",
     "ngx-infinite-scroll": "^7.0.1",
