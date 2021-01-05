@@ -33,7 +33,7 @@
     "@ngx-share/core": "^7.1.2",
     "angular-font-awesome": "^3.1.2",
     "angular-material-steppers": "0.0.18",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
